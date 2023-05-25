@@ -73,9 +73,8 @@ namespace Mobix.Controllers
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
-            // TODO: Implement user logout logic using _signInManager
-
-            return Ok();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok(new { Message = "You are logged out" });
         }
     }
 }
