@@ -12,6 +12,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     SampleComponent,
     ContactComponent,
     LoginComponent,
-    CatalogComponent
+    CatalogComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

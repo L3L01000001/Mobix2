@@ -16,12 +16,12 @@
   </div>
   <div class="container-fluid" style="margin-top:60px;">
     <div class="col-auto mb-3" style="display:flex; gap: 70px;">
-      <div *ngFor="let p of proizvodi" class="card" style="width: 18rem;border-color: palevioletred;border-width: 3px;">
+      <div *ngFor="let p of proizvodi" [routerLink]="['/product-details', p.proizvodID]" class="card" style="width: 18rem;border-color: palevioletred;border-width: 3px;">
           <div class="card-body">
               <img src="{{p.slikaProizvoda}}" class="card-img-top" alt="...">
-              <h5 class="card-title" style="color:palevioletred; font-family: Helvetica; font-size: 17px; text-align:center; margin-top:10px;"><a routerLink="/about" style="color:palevioletred; font-family: Helvetica; font-size: 17px; text-align:center; margin-top:10px;">{{p.naziv}}</a></h5>
+              <h5 class="card-title" style="color:palevioletred; font-family: Helvetica; font-size: 17px; text-align:center; margin-top:10px;"><a [routerLink]="['/product-details', p.proizvodID]" style="color:palevioletred; font-family: Helvetica; font-size: 17px; text-align:center; margin-top:10px;">{{p.naziv}}</a></h5>
               <a routerLink="/cart" class=" btn" style="margin-right: 10px;text-align:center; background-color:rgb(216, 112, 147); color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Add to Cart</a>
-              <a routerLink="/about" class="btn card-link" style="margin-right: 10px;text-align:center; background-color:palevioletred; color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Read More</a>
+              <a [routerLink]="['/product-details', p.proizvodID]" class="btn card-link" style="margin-right: 10px;text-align:center; background-color:palevioletred; color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Read More</a>
            <hr>
   
           </div>
@@ -57,4 +57,6 @@
   
     </div> -->
   </div>
+
+
   
