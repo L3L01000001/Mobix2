@@ -1,0 +1,50 @@
+.container {
+    width: 100%;
+    height: 1100px;
+}
+
+.slika-proizvoda {
+    width: 600px;
+    height: auto;
+}
+
+.naziv {
+    position: relative;
+    float: right;
+    color:palevioletred;
+    font-size: 50px;
+}
+
+.cijena{
+    position: relative;
+    float: right;
+    color:palevioletred;
+    font-size: 50px;
+}
+
+.text {
+    position: relative;
+    float: right;
+    color:palevioletred;
+    right: 100px;
+    top: 200px;
+    display: grid;
+}
+
+.opis {
+    position: relative;
+    color:palevioletred;
+    font-size: 30px;
+}
+
+.dodaj-u-korpu {
+    text-align:center; 
+    background-color:rgb(216, 112, 147); 
+    color: white; 
+    height: 45px; 
+    width: 200px; 
+    border-radius: 7px; 
+    border: 0; 
+    text-decoration: none;
+    padding: 10px;
+}

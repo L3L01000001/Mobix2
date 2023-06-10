@@ -10,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CatalogComponent implements OnInit {
   filterProizvod:string = '';
   proizvodi: any = null;
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute){}
+  odabraniProizvod: any = null;
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router){}
 
   testirajWebApi(): void {
     this.httpClient.get(
@@ -43,6 +44,11 @@ export class CatalogComponent implements OnInit {
           this.proizvodi = x;
         });
     }
+  }
+
+  prikaziDetalje(p: any){
+    this.odabraniProizvod = p;
+    this.router.navigate(['/product-details', p.proizvodID]);
   }
 
 }

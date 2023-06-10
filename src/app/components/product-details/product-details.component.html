@@ -1,0 +1,12 @@
+<div class="container">
+<div *ngIf="proizvod">
+    <img src="{{proizvod.slikaProizvoda}}" class="slika-proizvoda" alt="...">
+    <div class="text">
+        <h2 class="naziv">Model: {{ proizvod.naziv }}</h2>
+        <p class="cijena"> {{ proizvod.cijena }} KM</p>
+        <a routerLink="/cart" class="dodaj-u-korpu">Add to Cart</a>
+    </div>
+    <div class="opis" [innerHTML]="formatiranjeOpisa(proizvod.opis)"></div>
+  </div>
+
+</div>
