@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">
+        <img src="../assets/Ikona.png" alt="logo" style="width:50px;height:50px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div *ngIf="isEnglish===true; else isBosnian" class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li [ngClass]="{'active': activeRoute === '/'}" class="nav-item">
+            <a class="nav-link" routerLink="/">
+              Home
+            </a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
+            <a class="nav-link" routerLink="/about">About</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item">
+            <a class="nav-link" routerLink="/cart">Cart</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/catalog'}" class="nav-item">
+            <a class="nav-link" routerLink="/catalog">Catalog</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/contact'}" class="nav-item">
+            <a class="nav-link" routerLink="/contact">Contact</a>
+          </li>
+  
+  
+          <li [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
+            <a class="nav-link" routerLink="/about">Register</a>
+          </li>
+  
+  
+          <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/indexBa" (click)="isEnglish=false">BA</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
+            <a class="nav-link" routerLink="/index" (click)="isEnglish=true">ENG</a>
+          </li>
+        </ul>
+      </div>
+  
+  
+      <ng-template #isBosnian>
+      <div class="collapse navbar-collapse" id="navbarResponsive1">
+        <ul class="navbar-nav ml-auto">
+          <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/indexBa">
+              Početna
+            </a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/aboutBa">O nama</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/cartBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/cartBa">Korpa</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/catalogBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/catalogBa">Ponuda</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/contactBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/contactBa">Kontaktirajte nas</a>
+          </li>
+  
+  
+          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/aboutBa">Prijavite se</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/aboutBa">Registrujte se</a>
+          </li>
+  
+  
+          <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
+            <a class="nav-link" routerLink="/indexBa" (click)="isEnglish=false">BA</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
+            <a class="nav-link" routerLink="/index" (click)="isEnglish=true">ENG</a>
+          </li>
+        </ul>
+      </div>
+      </ng-template>
+  
+      </div>
+  </nav>

@@ -1,0 +1,99 @@
+<footer *ngIf="isEnglish===true; else bosnianFooter" class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6>About</h6>
+          <p class="text-justify">Visit us at FIT Mostar</p>
+        </div>
+  
+        <div class="col-xs-6 col-md-3">
+          <h6>Categories</h6>
+          <ul class="footer-links">
+            <li><a routerLink="/catalog">iPhone</a></li>
+            <li><a routerLink="/catalog">Samsung</a></li>
+            <li><a routerLink="/catalog">Huawei</a></li>
+            <li><a routerLink="/catalog">Redmi</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-xs-6 col-md-3">
+          <h6>Quick Links</h6>
+          <ul class="footer-links">
+            <li><a routerLink="/about">About Us</a></li>
+            <li><a routerLink="/contact">Contact Us</a></li>
+            <li><a routerLink="/catalog">Shop</a></li>
+            <li><a routerLink="/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">
+             <a style="color: white" routerLink="/">Mobix online shop 2023</a>
+          </p>
+        </div>
+  
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <ul class="social-icons">
+            <li><a class="facebook" href="www.facebook.com"><i class="fab fa-facebook"></i></a></li>
+            <li><a class="twitter" href="www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+            <li><a class="linkedin" href="www.linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <ng-template #bosnianFooter>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6>O nama</h6>
+          <p class="text-justify">Posjetite nas na FIT Mostar</p>
+        </div>
+  
+        <div class="col-xs-6 col-md-3">
+          <h6>Kategorije</h6>
+          <ul class="footer-links">
+            <li><a routerLink="/catalog">iPhone</a></li>
+            <li><a routerLink="/catalog">Samsung</a></li>
+            <li><a routerLink="/catalog">Huawei</a></li>
+            <li><a routerLink="/catalog">Redmi</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-xs-6 col-md-3">
+          <h6>Brzi linkovi</h6>
+          <ul class="footer-links">
+            <li><a routerLink="/aboutBa">O nama</a></li>
+            <li><a routerLink="/contactBa">Kontaktirajte nas</a></li>
+            <li><a routerLink="/catalogBa">Trgovina</a></li>
+            <li><a routerLink="/privacyBa">Privatnost</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">
+            <a style="color: white" routerLink="/">Mobix online shop 2023</a>
+          </p>
+        </div>
+  
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <ul class="social-icons">
+            <li><a class="facebook" href="www.facebook.com"><i class="fab fa-facebook"></i></a></li>
+            <li><a class="twitter" href="www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+            <li><a class="linkedin" href="www.linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </ng-template>
