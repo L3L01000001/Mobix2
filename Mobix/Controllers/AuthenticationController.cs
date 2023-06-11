@@ -53,10 +53,15 @@ namespace Mobix.Controllers
                 return new BadRequestObjectResult(new { Message = "Login failed" });
             }
 
+            var roles = await _userManager.GetRolesAsync(identityUser);
+
+            var userRole = roles.FirstOrDefault();
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, identityUser.Email),
-                new Claim(ClaimTypes.Name, identityUser.UserName)
+                new Claim(ClaimTypes.Name, identityUser.UserName),
+                new Claim(ClaimTypes.Role, userRole)
             };
 
             var claimsIdentity = new ClaimsIdentity(
@@ -66,7 +71,7 @@ namespace Mobix.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
 
-            return Ok(new { Message = "You are logged in" });
+            return Ok(new { Message = "You are logged in", Role = userRole });
         }
 
         // Action for user logout
