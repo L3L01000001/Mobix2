@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     ContactComponent,
     LoginComponent,
     CatalogComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

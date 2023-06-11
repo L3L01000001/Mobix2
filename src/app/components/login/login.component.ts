@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: ''
   }
   rememberMe: any;
+  isAdmin: boolean = false;
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,12 +24,18 @@ export class LoginComponent implements OnInit {
   btnLogin(){
     this.http.post<any>("https://localhost:7278/api/Login", this.model)
     .subscribe(res=>{
-      console.log('Login successful:', res);
-        // Handle successful login here (e.g., redirect, show success message)
+       if (res.role === 'Admin') {
+        this.router.navigate(['/admin']);
+        console.log("Admin")
+      } else if (res.role === 'Korisnik') {
+        this.router.navigate(['/user']);
+        console.log("User")
+      } else {
+        console.log("Pogresne login informacije")
+      }
       },
       (error) => {
         console.error('Login failed:', error);
-        // Handle failed login here (e.g., display error message)
       });
     }
   }
