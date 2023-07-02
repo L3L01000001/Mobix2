@@ -8,12 +8,15 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
   },
+ 
+
   {
     path: '',
     component: IndexComponent
@@ -33,6 +36,10 @@ const routes: Routes = [
   {
     path: 'product-details/:id',
     component: ProductDetailsComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
   }
 ];
 

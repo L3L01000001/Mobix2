@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,26 +17,41 @@ export class LoginComponent implements OnInit {
   }
   rememberMe: any;
   isAdmin: boolean = false;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, private authService:AuthService) { }
 
   ngOnInit(): void {
   }
 
   btnLogin(){
-    this.http.post<any>("https://localhost:7278/api/Login", this.model)
+    this.httpClient.post<any>("https://localhost:7278/api/Login", this.model)
     .subscribe(res=>{
        if (res.role === 'Admin') {
-        this.router.navigate(['/admin']);
-        console.log("Admin")
+        alert('Uspješan  '+this.model.email);
+        this.isAdmin=true;
+        // console.log("Admin");
+        localStorage.setItem('email',this.model.email);
+        this.authService.setUserEmail(this.model.email);
+        this.router.navigate(['/admin', this.model.email]);
       } else if (res.role === 'Korisnik') {
         this.router.navigate(['/user']);
-        console.log("User")
+        console.log("User");
+        this.router.navigate(['/admin', this.model.email]);
       } else {
-        console.log("Pogresne login informacije")
+        
+
+        alert('Uspješan login '+this.model.email);
+        localStorage.setItem('email',this.model.email);
+        this.authService.setUserEmail(this.model.email);
+        this.router.navigate(['/admin']);
+
       }
       },
       (error) => {
-        console.error('Login failed:', error);
+        alert('Pogresan login');
+        this.model.email='';
+        this.model.password='';
+        console.log("Pogresne login informacije", error)
+        this.router.navigate(['/login']);
       });
     }
   }

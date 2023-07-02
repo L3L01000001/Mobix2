@@ -15,6 +15,8 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminComponent } from './components/admin/admin.component';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     CatalogComponent,
     ProductDetailsComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

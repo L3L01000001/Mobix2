@@ -27,14 +27,17 @@
             <a class="nav-link" routerLink="/contact">Contact</a>
           </li>
   
-  
-          <li [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
+          
+          <li *ngIf="!isLoggedIn()" [ngClass]="{'active': activeRoute === '/login'}"  class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
+          <li *ngIf="!isLoggedIn()" [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
             <a class="nav-link" routerLink="/about">Register</a>
           </li>
-  
+          
+          <li *ngIf="isLoggedIn()" [ngClass]="{'active': activeRoute === '/admin'}" class="nav-item">
+            <a class="nav-link" routerLink="/admin">{{email}}</a>
+          </li>
   
           <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
             <a class="nav-link" routerLink="/indexBa" (click)="isEnglish=false">BA</a>
@@ -42,6 +45,7 @@
           <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
             <a class="nav-link" routerLink="/index" (click)="isEnglish=true">ENG</a>
           </li>
+
         </ul>
       </div>
   
@@ -68,13 +72,16 @@
           </li>
   
   
-          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/aboutBa">Prijavite se</a>
+          <li *ngIf="!isLoggedIn()" [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
+            <a class="nav-link" routerLink="/login">Prijavite se</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/aboutBa">Registrujte se</a>
+          <li *ngIf="!isLoggedIn()" [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
+            <a class="nav-link" routerLink="/login">Registrujte se</a>
           </li>
   
+           <li *ngIf="isLoggedIn()" [ngClass]="{'active': activeRoute === '/admin'}" class="nav-item">
+            <a class="nav-link" routerLink="/admin">{{email}}</a>
+          </li>
   
           <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
             <a class="nav-link" routerLink="/indexBa" (click)="isEnglish=false">BA</a>
