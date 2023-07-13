@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit{
   activeRoute: string = "";
   email:any="";
 
-  constructor(private router: Router, private authService:AuthService) {
+  constructor(private router: Router, public authService:AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = event.url;
@@ -22,12 +22,12 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.email=this.authService.getUserEmail();
+   this.email = localStorage.getItem('email');
+   this.authService.login(this.email);
   }
 
-  isLoggedIn():boolean
-  {
-    return !!this.email;
+  btnLogout(){
+    this.authService.logout();
   }
 
   title = 'Mobix';
