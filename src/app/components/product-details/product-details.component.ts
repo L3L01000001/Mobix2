@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
 
+  private apiUrl="https://localhost:7278/api/get-all-products";
   proizvod: any = null;
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) { }
 
@@ -20,6 +22,10 @@ export class ProductDetailsComponent implements OnInit {
      
     }); 
     console.log(this.proizvod)
+  }
+
+  getProizvodi():Observable<any>{
+    return this.httpClient.get<any>(this.apiUrl);
   }
 
   testirajWebApi(proizvodID: any){
