@@ -16,8 +16,15 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminComponent } from './components/admin/admin.component';
+import {  JwtModule, JwtModuleOptions  } from '@auth0/angular-jwt';
 
-
+const jwtOptions: JwtModuleOptions = {
+  config: {
+    tokenGetter: () => localStorage.getItem('token'),
+    allowedDomains: ['https://localhost:4200'], // Replace with your API domain
+    disallowedRoutes: ['https://localhost:4200/auth'] // Replace with any disallowed routes
+  }
+};
 
 @NgModule({
   declarations: [
@@ -40,7 +47,8 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserAnimationsModule,
     NgSimpleCarouselModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot(jwtOptions)
   ],
   providers: [],
   bootstrap: [AppComponent]
