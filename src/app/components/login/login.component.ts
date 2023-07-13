@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
         // console.log("Admin");
         localStorage.setItem('email',this.model.email);
         this.authService.setUserEmail(this.model.email);
-        this.router.navigate(['/admin', this.model.email]);
+        this.router.navigate(['/admin']);
       } else if (res.role === 'Korisnik') {
         this.router.navigate(['/user']);
         console.log("User");
-        this.router.navigate(['/admin', this.model.email]);
+        this.router.navigate(['/admin']);
       } else {
         
 
