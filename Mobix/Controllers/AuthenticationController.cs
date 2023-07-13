@@ -6,6 +6,9 @@ using Mobix.Data;
 using Mobix.EntityModels;
 using Mobix.ViewModels;
 using System.Security.Claims;
+using Mobix.JwtFeatures;
+using Mobix.DTO;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Mobix.Controllers
 {
@@ -16,12 +19,14 @@ namespace Mobix.Controllers
         private readonly SignInManager<Korisnik> _signInManager;
         private readonly UserManager<Korisnik> _userManager;
         private readonly MobixDbContext _db;
+        private readonly JwtHandler _jwtHandler;
 
-        public AuthenticationController(SignInManager<Korisnik> signInManager, UserManager<Korisnik> userManager, MobixDbContext db)
+        public AuthenticationController(SignInManager<Korisnik> signInManager, UserManager<Korisnik> userManager, MobixDbContext db, JwtHandler jwtHandler)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _db = db;
+            _jwtHandler = jwtHandler;
         }
 
         //[HttpPost("register")]
@@ -57,28 +62,18 @@ namespace Mobix.Controllers
 
             var userRole = roles.FirstOrDefault();
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, identityUser.Email),
-                new Claim(ClaimTypes.Name, identityUser.UserName),
-                new Claim(ClaimTypes.Role, userRole)
-            };
+            var signingCredentials = _jwtHandler.GetSigningCredentials();
+            var claims = _jwtHandler.GetClaims(identityUser);
+            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
 
-            var claimsIdentity = new ClaimsIdentity(
-                claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity));
-
-            return Ok(new { Message = "You are logged in", Role = userRole });
         }
 
         // Action for user logout
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok(new { Message = "You are logged out" });
         }
     }
