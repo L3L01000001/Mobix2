@@ -13,15 +13,15 @@ namespace MobixWebShop.EntityModels
     {
         [Key]
         public int ProizvodID { get; set; }
-        public string Naziv { get; set; }
-        public string Opis { get; set; }
-        public string Stanje { get; set; }
-        public int Cijena { get; set; }
-        public string SlikaProizvoda { get; set; }
-        public int Kolicina { get; set; }
+        public string? Naziv { get; set; }
+        public string? Opis { get; set; }
+        public string? Stanje { get; set; }
+        public int? Cijena { get; set; }
+        public string? SlikaProizvoda { get; set; }
+        public int? Kolicina { get; set; }
         [ForeignKey(nameof(DobavljacProizvoda))]
         public int? DobavljacProizvodaID { get; set; }
-        public Dobavljac DobavljacProizvoda { get; set; }
+        public Dobavljac? DobavljacProizvoda { get; set; }
 
     }
 }
