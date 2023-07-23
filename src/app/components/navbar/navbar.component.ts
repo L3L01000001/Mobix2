@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit{
   isEnglish:boolean=true;
   isBosnian:any;
   activeRoute: string = "";
+  dozvoljenAdmin:boolean=false;
   email:any="";
 
   constructor(private router: Router, public authService:AuthService) {
@@ -23,6 +24,9 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit(): void {
    this.email = localStorage.getItem('email');
+   var roleUser=localStorage.getItem('role');
+   if(roleUser=="Admin")
+    this.dozvoljenAdmin=true;
    this.authService.login(this.email);
   }
 

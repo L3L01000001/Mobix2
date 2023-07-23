@@ -35,16 +35,17 @@
             <a class="nav-link" routerLink="/about">Register</a>
           </li>
           
-          <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/admin'}" class="nav-item">
-            <a class="nav-link" routerLink="/admin">Hello {{authService.userName}}</a>
+          <li class="nav-item">
+            <a *ngIf="authService.isLoggedIn&&authService.checkAdminStatus()==true" class="nav-link" routerLink="/admin">Hello {{authService.userName}}</a>
+            <a *ngIf="authService.isLoggedIn&&authService.checkAdminStatus()==false" class="nav-link" routerLink="/">Hello {{authService.userName}}</a>
           </li>
 
           <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/logout'}" class="nav-item">
             <a class="nav-link"  (click)="btnLogout()" >Logout</a>
           </li>
   
-          <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/indexBa" (click)="isEnglish=false">BA</a>
+          <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
+            <a class="nav-link" routerLink="/index" (click)="isEnglish=false">BA</a>
           </li>
           <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
             <a class="nav-link" routerLink="/index" (click)="isEnglish=true">ENG</a>
@@ -53,38 +54,40 @@
         </ul>
       </div>
   
-  
+  <!-- Dodati route za bosanski jezik nakon što se naprave te stranice -->
       <ng-template #isBosnian>
       <div class="collapse navbar-collapse" id="navbarResponsive1">
         <ul class="navbar-nav ml-auto">
-          <li [ngClass]="{'active': activeRoute === '/indexBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/indexBa">
+          <li [ngClass]="{'active': activeRoute === '/'}" class="nav-item">
+            <a class="nav-link" routerLink="/">
               Početna
             </a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/aboutBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/aboutBa">O nama</a>
+          <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
+            <a class="nav-link" routerLink="/about">O nama</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/cartBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/cartBa">Korpa</a>
+          <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item">
+            <a class="nav-link" routerLink="/cart">Korpa</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/catalogBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/catalogBa">Ponuda</a>
+          <li [ngClass]="{'active': activeRoute === '/catalog'}" class="nav-item">
+            <a class="nav-link" routerLink="/catalog">Ponuda</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/contactBa'}" class="nav-item">
-            <a class="nav-link" routerLink="/contactBa">Kontaktirajte nas</a>
+          <li [ngClass]="{'active': activeRoute === '/contact'}" class="nav-item">
+            <a class="nav-link" routerLink="/contact">Kontaktirajte nas</a>
           </li>
   
   
           <li *ngIf="!authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
             <a class="nav-link" routerLink="/login">Prijavite se</a>
           </li>
-          <li *ngIf="!authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/login'}" class="nav-item">
-            <a class="nav-link" routerLink="/login">Registrujte se</a>
+          <li *ngIf="!authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/register'}" class="nav-item">
+            <a class="nav-link" routerLink="/register">Registrujte se</a>
           </li>
   
-          <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/admin'}" class="nav-item">
-            <a class="nav-link" routerLink="/admin">Pozdrav {{authService.userName}}</a>
+          <!-- <li *ngIf="authService.isLoggedIn&&authService.adminUser" [ngClass]="{'active': activeRoute === '/admin'}" class="nav-item"> -->
+          <li class="nav-item">
+            <a *ngIf="authService.isLoggedIn&&authService.checkAdminStatus()==true" class="nav-link" routerLink="/admin">Pozdrav {{authService.userName}}</a>
+            <a *ngIf="authService.isLoggedIn&&authService.checkAdminStatus()==false" class="nav-link" routerLink="/">Pozdrav {{authService.userName}}</a>
           </li>
 
           <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/logout'}" class="nav-item">

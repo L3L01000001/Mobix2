@@ -1,0 +1,46 @@
+<table class="table table-warning">
+    <tr style="font-size: 10px;">
+        <th>ID <br> ( {{user.id}} )</th>
+        <th>Ime <br> ( {{user.ime}} )</th>
+        <th>Prezime <br> ( {{user.prezime}} )</th>
+        <th>User name <br> ( {{user.userName}} )</th>
+        <th>Email <br> ( {{user.email}} )</th>
+        <th>Broj telefona <br> ( {{user.phoneNumber}} )</th>
+        <th>Uloga <br> ( {{user.userRole}} )</th>
+    </tr>
+    <tbody>
+    <tr [(ngModel)]="user" style="font-size: 15px;">
+        <td>
+            <input [(ngModel)]="user.id" disabled size="20">
+        </td>
+        <td>
+            <input [(ngModel)]="user.ime" size="10">
+
+        </td>
+        <td>
+            <input [(ngModel)]="user.prezime" size="10">
+
+        </td>
+        <td>
+            <input [(ngModel)]="user.userName" size="17">
+
+        </td>
+        <td>
+            <input [(ngModel)]="user.email" size="17">
+
+        </td>
+        <td>
+            <input [(ngModel)]="user.phoneNumber" size="13">
+
+        </td>
+        <td>
+            <input [(ngModel)]="user.userRole" size="10">
+
+        </td>
+        <td>
+            <button type="button" (click)="SaveChanges()">Save</button>
+        </td>
+        
+    </tr>
+    </tbody>
+</table>

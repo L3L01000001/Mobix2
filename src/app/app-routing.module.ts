@@ -9,6 +9,9 @@ import { LoginComponent } from './components/login/login.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
 
 const routes: Routes = [
   {
@@ -40,7 +43,17 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent
-  }
+  },
+  {
+    path: 'user-details',
+    component: UserDetailsComponent
+  }, {
+    path: 'user-edit/:id',
+    component: UserEditComponent
+  }, {
+    path: 'product-edit/:id',
+    component: ProductEditComponent
+  },
 ];
 
 @NgModule({
