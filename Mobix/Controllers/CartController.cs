@@ -18,13 +18,14 @@ namespace Mobix.Controllers
         }
 
         [HttpGet("cart")]
-        public IActionResult Get(int korisnikId) {
+        public IActionResult Get(int korisnikId)
+        {
             var korpa = _db.Korpa
                 .Include(k => k.KorpaStavke)
                 .ThenInclude(p => p.Proizvod)
                 .FirstOrDefault(k => k.KorisnikId == korisnikId);
 
-            if(korpa == null)
+            if (korpa == null)
             {
                 return BadRequest("Korpa je trenutno prazna.");
             }
@@ -46,10 +47,11 @@ namespace Mobix.Controllers
                 _db.Korpa.Add(korpa);
             }
 
-            var korpaStavka = new KorpaStavke { 
+            var korpaStavka = new KorpaStavke
+            {
                 Korpa = korpa,
-                ProizvodID = proizvodID, 
-                Kolicina = kolicina 
+                ProizvodID = proizvodID,
+                Kolicina = kolicina
             };
             _db.KorpaStavke.Add(korpaStavka);
 
@@ -59,11 +61,11 @@ namespace Mobix.Controllers
         }
 
         [HttpPut("{korpaStavkaId}")]
-        public IActionResult izmijeni(int korpaStavkaId, int kolicina)
+        public ActionResult izmijeni(int korpaStavkaId, int kolicina)
         {
             var korpaStavka = _db.KorpaStavke.FirstOrDefault(ks => ks.ID == korpaStavkaId);
 
-            if(korpaStavka == null)
+            if (korpaStavka == null)
             {
                 return BadRequest("Stavku nije moguce prikazati.");
             };
@@ -74,8 +76,8 @@ namespace Mobix.Controllers
             return Ok();
         }
 
-        [HttpDelete("{korpaStavkaId}")]
-        public IActionResult obrisi(int korpaStavkaId)
+        [HttpDelete("obrisiStavku/{korpaStavkaId}")]
+        public ActionResult obrisiStavku(int korpaStavkaId)
         {
             var korpaStavka = _db.KorpaStavke.FirstOrDefault(ks => ks.ID == korpaStavkaId);
 
@@ -89,5 +91,21 @@ namespace Mobix.Controllers
 
             return Ok();
         }
+
+        //[HttpDelete("{korpaId}")]
+        //public ActionResult obrisi(int korpaStavkaId)
+        //{
+        //    var korpaStavka = _db.Korpa.FirstOrDefault(ks => ks.ID == korpaStavkaId);
+
+        //    if (korpaStavka == null)
+        //    {
+        //        return BadRequest("Stavka ne postoji.");
+        //    };
+
+        //    _db.Korpa.Remove(korpaStavka);
+        //    _db.SaveChanges();
+
+        //    return Ok();
+        //}
     }
 }

@@ -8,7 +8,9 @@ namespace Mobix.EntityModels
 {
     public class Korisnik : IdentityUser
     {
-        public string Ime { get; set; }
-        public string Prezime { get; set; }
+        public string? Ime { get; set; }
+        public string? Prezime { get; set; }
+        public string? UserRole { get; set; }
+        //public ICollection<IdentityRole> Uloge { get; set; }
     }
 }

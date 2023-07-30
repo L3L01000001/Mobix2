@@ -47,26 +47,49 @@ namespace Mobix.Controllers
             }
 
             var identityUser = await _userManager.FindByNameAsync(model.Email);
+            var identityUser1 = await _userManager.FindByEmailAsync(model.Email);
             if (identityUser == null)
             {
-                return new BadRequestObjectResult(new { Message = "Login failed" });
-            }
+                var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser1, identityUser1.PasswordHash, model.Password);
+                if (result == PasswordVerificationResult.Failed)
+                {
+                    return new BadRequestObjectResult(new { Message = "Login failed" });
+                }
+                var roles = await _userManager.GetRolesAsync(identityUser1);
+                var userRole = identityUser1.UserRole;
+                var signingCredentials = _jwtHandler.GetSigningCredentials();
+                var claims = _jwtHandler.GetClaims(identityUser1);
+                var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-            var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser, identityUser.PasswordHash, model.Password);
-            if (result == PasswordVerificationResult.Failed)
+                return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
+               
+            }
+            else if(identityUser!=null)
             {
-                return new BadRequestObjectResult(new { Message = "Login failed" });
+                var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser, identityUser.PasswordHash, model.Password);
+                if (result == PasswordVerificationResult.Failed)
+                {
+                    return new BadRequestObjectResult(new { Message = "Login failed" });
+                }
+                var roles = await _userManager.GetRolesAsync(identityUser);
+                var userRole = identityUser.UserRole;
+                var signingCredentials = _jwtHandler.GetSigningCredentials();
+                var claims = _jwtHandler.GetClaims(identityUser);
+                var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+                var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+
+                return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
             }
 
-            var roles = await _userManager.GetRolesAsync(identityUser);
+            
+            
+            else
+            {
+                return BadRequest("Something went wrong");
+            }
 
-            var userRole = roles.FirstOrDefault();
 
-            var signingCredentials = _jwtHandler.GetSigningCredentials();
-            var claims = _jwtHandler.GetClaims(identityUser);
-            var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
-            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
 
         }
 

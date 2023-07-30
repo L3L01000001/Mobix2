@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Mobix.Data;
 using Mobix.ViewModels;
 using MobixWebShop.EntityModels;
+using System.Collections.Generic;
 
 namespace Mobix.Controllers
 {
@@ -26,6 +28,34 @@ namespace Mobix.Controllers
             return data.ToList();
         }
 
+
+        [HttpPut("edit-proizvod/{id}")]
+        public IActionResult EditProizvod(int id, ProizvodVM podaci)
+        {
+            var odabraniProizvod = _db.Proizvodi.FirstOrDefault(pronadjeni => pronadjeni.ProizvodID == id);
+            if (odabraniProizvod == null)
+                return BadRequest("Proizvod sa tim IDom ne postoji");
+            else
+            {
+                odabraniProizvod.Naziv = podaci.Naziv;
+                odabraniProizvod.SlikaProizvoda = podaci.Slika;
+                odabraniProizvod.DobavljacProizvodaID = podaci.DobavljacProizvodaID;
+                odabraniProizvod.Cijena = podaci.Cijena;
+                odabraniProizvod.Opis = podaci.Opis;
+                odabraniProizvod.Kolicina = podaci.Kolicina;
+                odabraniProizvod.Stanje = podaci.Stanje;
+
+
+                _db.Update(odabraniProizvod);
+                _db.SaveChanges();
+            }
+
+
+
+            return Ok("Uspješno spašen " + odabraniProizvod);
+
+        }
+
         [HttpGet("{id}")]
         public ActionResult GetProduct(int id)
         {
@@ -34,6 +64,7 @@ namespace Mobix.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpPost("add-product")]
+        //[Authorize]
         public ActionResult<Proizvod> AddProduct(ProizvodVM vm)
         {
             var p = new Proizvod
@@ -53,12 +84,13 @@ namespace Mobix.Controllers
             return p;
         }
 
-        [HttpPost("{id}")]
-        public ActionResult DeleteProduct(int ID)
+        [HttpDelete("delete/{id}")]
+        //[Authorize]
+        public IActionResult DeleteProduct(int id)
         {
-            Proizvod p = _db.Proizvodi.Find(ID);
+            var p = _db.Proizvodi.FirstOrDefault(x => x.ProizvodID == id);
 
-            if (p == null || ID == 1)
+            if (p == null)
                 return BadRequest("Pogrešan ID");
 
             _db.Remove(p);
