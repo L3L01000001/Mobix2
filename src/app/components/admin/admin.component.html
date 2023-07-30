@@ -21,11 +21,11 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" *ngIf="dozvoljeno==true">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
+        <!-- <p id="ispisiRole"></p> -->
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -118,16 +118,16 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="admin.component.html">
+                <a class="nav-link" routerLink="/catalog">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Lista proizvoda</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="admin.component.html">
+                <a class="nav-link" routerLink="/user-details">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Profili korisnika</span></a>
             </li>
 
             <!-- Divider -->
@@ -650,6 +650,10 @@
     <script src="./js/demo/chart-area-demo.js"></script>
     <script src="./js/demo/chart-pie-demo.js"></script>
 
+</body>
+
+<body *ngIf="dozvoljeno==false" id="page-top">
+    Nedozvoljena akcija
 </body>
 
 </html>

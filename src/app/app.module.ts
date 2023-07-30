@@ -17,6 +17,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminComponent } from './components/admin/admin.component';
 import {  JwtModule, JwtModuleOptions  } from '@auth0/angular-jwt';
+import { CartComponent } from './components/cart/cart.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+
+import {MatInputModule} from '@angular/material/input';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {Component} from '@angular/core';
+
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const jwtOptions: JwtModuleOptions = {
   config: {
@@ -38,7 +53,13 @@ const jwtOptions: JwtModuleOptions = {
     ProductDetailsComponent,
     NavbarComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    CartComponent,
+    UserDetailsComponent,
+    ProductEditComponent,
+    UserEditComponent,
+    RegisterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +69,11 @@ const jwtOptions: JwtModuleOptions = {
     NgSimpleCarouselModule,
     FormsModule,
     ReactiveFormsModule,
+    MatButtonModule, 
+    MatDividerModule,
     JwtModule.forRoot(jwtOptions)
+  ],
+  exports:[
   ],
   providers: [],
   bootstrap: [AppComponent]

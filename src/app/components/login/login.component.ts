@@ -26,23 +26,21 @@ export class LoginComponent implements OnInit {
   btnLogin(){
     this.httpClient.post<any>("https://localhost:7278/api/Login", this.model)
     .subscribe(res=>{
-      console.log(res)
+      console.log(res);
       localStorage.setItem('token', res.token);
       localStorage.setItem('email',this.model.email);
-      console.log(res.token)
+      localStorage.setItem('role', res.role);
+      var roleUser=localStorage.getItem('role');
+      // console.log(res.token)
       this.authService.login(this.model.email);
-       if (res.role === 'Admin') {
-        alert('Uspješan  '+this.model.email);
-        this.isAdmin=true;
+       if (roleUser=="Admin") {
+        alert('Uspješan admin login '+this.model.email);
         // console.log("Admin");
         this.router.navigate(['/admin']);
-      } else if (res.role === 'Korisnik') {
-        this.router.navigate(['/user']);
-        console.log("User");
-        this.router.navigate(['/admin']);
-      } else {
-        alert('Uspješan login '+this.model.email);
-        this.router.navigate(['/admin']);
+      }
+      else {
+        alert('Uspješan user login '+this.model.email);
+        this.router.navigate(['/']);
 
       }
       },

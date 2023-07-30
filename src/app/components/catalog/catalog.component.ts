@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.css']
+  styleUrls: ['./catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
   filterProizvod:string = '';
   proizvodi: any = null;
+  editable:boolean =false;
+  lokalniEmail:any=localStorage.getItem('email');
   odabraniProizvod: any = null;
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router){}
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public authService: AuthService){}
 
   testirajWebApi(): void {
     this.httpClient.get(
@@ -24,7 +27,20 @@ export class CatalogComponent implements OnInit {
   
   ngOnInit(): void {
    this.testirajWebApi();
+   this.authService.login(this.lokalniEmail);
+   this.editable=false;
   }
+
+  changeEditState(): void {
+    
+      this.editable=!this.editable;
+      if(this.editable==true)
+      document.getElementById('accentEdit')!.innerHTML="Edit ON";
+      else
+      document.getElementById('accentEdit')!.innerHTML="Edit OFF";
+    
+
+   }
 
   search(): void {
     if (this.filterProizvod !== '') {

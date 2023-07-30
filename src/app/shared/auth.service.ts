@@ -8,7 +8,9 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class AuthService {
   isLoggedIn = false;
+  adminUser=false;
   userName = '';
+  getUserRole='';
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {
     this.isLoggedIn = this.checkTokenValidity();
@@ -26,8 +28,29 @@ export class AuthService {
   }
 
   login(username: string) {
-    this.isLoggedIn = true;
+    this.isLoggedIn = this.checkTokenValidity();
     this.userName = username;
+    this.getUserRole=localStorage.getItem('role')!;
+    console.log(this.getUserRole);
+    if(this.getUserRole=="Admin")
+      this.adminUser=true;
+    // if(this.getUserRole=="Admin")
+    //   this.adminUser=true;
+    
+
+
+    // this.http.post<any>('https://localhost:7278/api/Login', this.userName).subscribe(res=>{
+    //   localStorage.setItem('token', res.token);
+    //   localStorage.setItem('email', username);
+    //   this.getUserRole=res.role;
+    // })
+  }
+
+  checkAdminStatus():boolean{
+    if(this.adminUser==true)
+    return true;
+    else
+    return false;
   }
 
   logout() {
@@ -36,7 +59,10 @@ export class AuthService {
       this.userName = '';
       localStorage.removeItem('email');
       localStorage.removeItem('token');
+      localStorage.removeItem('role');
       this.router.navigate(['/login']);
     });
   }
+
+
 }

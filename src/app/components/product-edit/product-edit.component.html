@@ -1,0 +1,68 @@
+<table class="table table-warning">
+    <tr style="font-size: 10px;">
+        <!-- <th>ID <br> {{proizvod.proizvodID}}</th>
+        <th>Naziv <br> {{proizvod.naziv}}</th>
+        <th>Stanje <br> {{proizvod.stanje}}</th>
+        <th>Kolicina <br> {{proizvod.kolicina}}</th>
+        <th>Cijena <br> {{proizvod.cijena}}</th>
+        <th>Opis <br> {{proizvod.opis}}</th>
+        <th>Slika <br> {{proizvod.slikaProizvoda}}</th>
+        <th>Dobavljač <br> {{proizvod.dobavljacProizvodaID}}</th> -->
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>Stanje</th>
+        <th>Kolicina</th>
+        <th>Cijena</th>
+        <th>Opis</th>
+        <th>Slika</th>
+        <th>Dobavljač</th>
+    </tr>
+    <tbody>
+    <tr [(ngModel)]="proizvod" style="font-size: 10px;">
+        <td>
+          <input [(ngModel)]="proizvod.proizvodID" disabled="" size="5">
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.naziv" size="15">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.stanje" size="10">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.kolicina" size="3">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.cijena" size="5">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.opis" size="80">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.slikaProizvoda" type="image" src="{{proizvod.slikaProizvoda}}" width="50" height="50">
+
+        </td>
+        <td>
+          <input [(ngModel)]="proizvod.dobavljacProizvodaID" size="3">
+          <!-- <label>Dobavljač</label>
+            <mat-select [(ngModel)]="svidobavljaci" name="dobavljac">
+              <option *ngFor="let food of svidobavljaci">
+                {{food}}
+              </option>
+          </mat-select> -->
+
+        </td>
+        <td>
+          <button type="button" (click)="SaveChanges()">Save</button>
+      </td>
+      </tr>
+    </tbody>
+</table>
+
+
+
+      
