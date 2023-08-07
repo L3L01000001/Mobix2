@@ -73,7 +73,7 @@ namespace Mobix.Controllers
                     return new BadRequestObjectResult(new { Message = "Login failed" });
                 }
                 var roles = await _userManager.GetRolesAsync(identityUser);
-                var userRole = identityUser.UserRole;
+                var userRole = roles.FirstOrDefault();
                 var signingCredentials = _jwtHandler.GetSigningCredentials();
                 var claims = _jwtHandler.GetClaims(identityUser);
                 var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);

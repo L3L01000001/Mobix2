@@ -24,9 +24,10 @@ namespace Mobix.JwtFeatures
         public List<Claim> GetClaims(IdentityUser user)
         {
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Email, user.UserName)
-        };
+            {
+            new Claim("Email", user.Email),
+            new Claim("Username", user.UserName)
+            };
             return claims;
         }
         public JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)

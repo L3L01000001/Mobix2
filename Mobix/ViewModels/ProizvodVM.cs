@@ -11,7 +11,9 @@ namespace Mobix.ViewModels
         public int? Cijena { get; set; }
         public string? Opis { get; set; }
 
-        public string? Slika { get; set; }
+        public string? SlikaProizvoda { get; set; }
+
+        public IFormFile SlikaFile { get; set; }
         public int? DobavljacProizvodaID { get; set; }
 
     }
