@@ -34,6 +34,10 @@ export class ProductDetailsComponent implements OnInit {
     )
     .subscribe((x:any) => {
       this.proizvod = x;
+
+        if (!x.slikaProizvoda.startsWith("http")) {
+          x.slikaProizvoda = "https://localhost:7278/Images/" + x.slikaProizvoda;
+        }
       console.log(this.proizvod);
     });
   }

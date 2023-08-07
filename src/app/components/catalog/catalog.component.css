@@ -1,4 +1,36 @@
 .card-img-top{
-    height: 280px;
-    width: auto;
+    width: 236px;
+    height: 236px;
+}
+
+.buttons {
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    width: 220px;
+    justify-content: space-around;
+}
+
+.button {
+    color: palevioletred;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.button:hover{
+    color: white;
+    background-color: palevioletred;
+}
+
+.divider {
+    color: palevioletred;
+    margin-bottom: 20px;
 }

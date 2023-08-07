@@ -32,6 +32,7 @@ import {Component} from '@angular/core';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 const jwtOptions: JwtModuleOptions = {
   config: {
@@ -59,6 +60,7 @@ const jwtOptions: JwtModuleOptions = {
     ProductEditComponent,
     UserEditComponent,
     RegisterComponent,
+    ProductAddComponent,
     
   ],
   imports: [

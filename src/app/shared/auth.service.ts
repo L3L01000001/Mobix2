@@ -34,6 +34,10 @@ export class AuthService {
     console.log(this.getUserRole);
     if(this.getUserRole=="Admin")
       this.adminUser=true;
+    else if (this.getUserRole=="Korisnik")
+      this.adminUser=false;
+    else 
+      this.adminUser=false;
     // if(this.getUserRole=="Admin")
     //   this.adminUser=true;
     
@@ -60,6 +64,7 @@ export class AuthService {
       localStorage.removeItem('email');
       localStorage.removeItem('token');
       localStorage.removeItem('role');
+      this.adminUser=false;
       this.router.navigate(['/login']);
     });
   }
