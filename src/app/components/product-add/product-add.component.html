@@ -1,0 +1,39 @@
+<div class="forma"><form [formGroup]="proizvodForma" (submit)="onSubmit()">
+
+    <div class="forma__group">
+    <label for="naziv">Name:</label>
+    <input type="text" id="naziv" formControlName="naziv" required>
+    </div>
+
+    <div class="forma__group">
+    <label for="opis">Description:</label>
+    <input type="text" id="opis" formControlName="opis" required>
+    </div>
+
+    <div class="forma__group">
+        <label for="stanje">State:</label>
+        <input type="text" id="stanje" formControlName="stanje" required>
+    </div>
+
+    <div class="forma__group">
+        <label for="cijena">Price:</label>
+        <input class="cijenaInput" type="number" id="cijena" formControlName="cijena" required>KM
+    </div>    
+  
+    <div class="forma__group">
+        <label for="slikaFile">Image:</label>
+        <input type="file" id="slikaFile" (change)="onFileChange($event)" formControlName="slikaFile">
+    </div>
+
+    <div class="forma__group">
+        <label for="kolicina">Quantity:</label>
+        <input type="number" formControlName="kolicina" id="kolicina" required>
+    </div>
+
+    <div class="forma__group">
+        <label for="dobavljacProizvodaID">Dobavljac:</label>
+        <input type="number" id="dobavljacProizvodaID" formControlName="dobavljacProizvodaID" required>
+    </div>
+    <button type="submit" [disabled]="!proizvodForma.valid">Add Product</button>
+  </form>
+</div>

@@ -22,6 +22,12 @@ export class CatalogComponent implements OnInit {
     )
     .subscribe((x:any) => {
       this.proizvodi = x;
+
+      this.proizvodi.forEach((proizvod: any) => {
+        if (!proizvod.slikaProizvoda.startsWith("http")) {
+          proizvod.slikaProizvoda = "https://localhost:7278/Images/" + proizvod.slikaProizvoda;
+        }
+      });
     });
   }
   
@@ -47,6 +53,11 @@ export class CatalogComponent implements OnInit {
       this.httpClient.get<any[]>("https://localhost:7278/Search?proizvodSearch=" + this.filterProizvod)
         .subscribe((x: any[]) => {
           this.proizvodi = x;
+          this.proizvodi.forEach((proizvod: any) => {
+            if (!proizvod.slikaProizvoda.startsWith("http")) {
+              proizvod.slikaProizvoda = "https://localhost:7278/Images/" + proizvod.slikaProizvoda;
+            }
+          });
         });
     } else {
       this.testirajWebApi();
@@ -65,6 +76,10 @@ export class CatalogComponent implements OnInit {
   prikaziDetalje(p: any){
     this.odabraniProizvod = p;
     this.router.navigate(['/product-details', p.proizvodID]);
+  }
+
+  noviProizvod(){
+    this.router.navigate(['/product-add']);
   }
 
 }

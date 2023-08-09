@@ -32,6 +32,9 @@ export class NavbarComponent implements OnInit{
 
   btnLogout(){
     this.authService.logout();
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
 
   title = 'Mobix';

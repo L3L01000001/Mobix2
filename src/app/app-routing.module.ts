@@ -12,6 +12,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,10 @@ const routes: Routes = [
   }, {
     path: 'product-edit/:id',
     component: ProductEditComponent
-  },
+  }, {
+    path: 'product-add',
+    component: ProductAddComponent
+  }
 ];
 
 @NgModule({
