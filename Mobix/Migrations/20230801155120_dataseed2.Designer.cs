@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobix.Data;
 
@@ -11,9 +12,10 @@ using Mobix.Data;
 namespace Mobix.Migrations
 {
     [DbContext(typeof(MobixDbContext))]
-    partial class MobixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230801155120_dataseed2")]
+    partial class dataseed2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
