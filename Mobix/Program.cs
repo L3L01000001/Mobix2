@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Mobix.JwtFeatures;
 using System.Data;
+using SignalR.Hubs;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.OpenApi.Models;
 
@@ -81,6 +82,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSignalR();
+
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = long.MaxValue;
@@ -100,7 +103,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(builder =>
 {
     builder
-    .AllowAnyOrigin()
+    .WithOrigins("https://localhost:44351", "http://localhost:4200", "http://localhost:7278")
     .AllowAnyMethod()
     .AllowAnyHeader();
 });
@@ -112,6 +115,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+app.MapHub<ContactHub>("/contactHub");
 
 app.MapControllers();
 
