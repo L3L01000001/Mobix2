@@ -33,6 +33,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
 
 const jwtOptions: JwtModuleOptions = {
   config: {
@@ -61,6 +62,7 @@ const jwtOptions: JwtModuleOptions = {
     UserEditComponent,
     RegisterComponent,
     ProductAddComponent,
+    AdminMessagesComponent,
     
   ],
   imports: [
