@@ -15,11 +15,13 @@ export class ContactComponent implements OnInit {
     email: '',
     comment: '',
   };
+  showAlert = false;
 
   constructor(private adminMessageService: AdminMessageService) { }
 
   ngOnInit(): void {
   }
+
 
   submitForm(contactForm: NgForm){
     if (contactForm.valid) {
@@ -28,18 +30,22 @@ export class ContactComponent implements OnInit {
       const email = contactForm.value.email;
       const comment = contactForm.value.comment;
 
-      const message = `Name: ${firstName} ${lastName}\nEmail: ${email}\nComment: ${comment}`;
+      const message = `${firstName} ${lastName} (${email}): ${comment}`;
 
-      this.adminMessageService.connectionEstablished.subscribe(() => {
-        this.adminMessageService.sendMessage(message);
-        console.log("Poruka poslana")
-      });
+      this.adminMessageService.sendMessageToAdmin(message);
 
       console.log(message)
-    
 
       contactForm.resetForm();
     }
-  }
+    this.showAlert = true;
 
+    setTimeout(() => {
+            this.hideAlert();
+    }, 3000);
+  }
+  
+  hideAlert() {
+    this.showAlert = false;
+  }
 }

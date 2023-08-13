@@ -89,6 +89,33 @@ p {
   margin-bottom: 1rem;
 }
 
+.messageDropdown{
+  width: 400px;
+    height: 300px;
+    background: palevioletred;
+    color: white;
+    position: absolute;
+    overflow: hidden;
+    right: 0px;
+    z-index: 9999;
+    border-radius: 10px 0px 10px 10px;
+    padding: 10px;
+}
+
+.message{
+  display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #3a3b45;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 1px solid white;
+    overflow:hidden;
+}
+
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
@@ -3227,6 +3254,19 @@ input[type="button"].btn-block {
   font-size: 0.875rem;
   color: #858796;
   white-space: nowrap;
+}
+
+.message-center {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: white;
+  white-space: nowrap;
+}
+
+.message-individual{
+  color: white;
 }
 
 .dropdown-item-text {

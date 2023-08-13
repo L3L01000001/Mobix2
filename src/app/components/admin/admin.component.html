@@ -250,11 +250,23 @@
                                (click)="toggleAdminMessagesDropdown()"
                                aria-haspopup="true" aria-expanded="false">
                               <i class="fas fa-envelope fa-fw"></i>
-                              <span class="badge badge-danger badge-counter">{{ zaprimljenePoruke.length }}</span>
+                              <span class="badge badge-danger badge-counter">{{ receivedMessages.length }}</span>
                             </a>
-                            <app-admin-messages *ngIf="showAdminMessages"></app-admin-messages>
+                           
+                            <div *ngIf="showAdminMessages">
+                                <div class="messageDropdown"
+                                    aria-labelledby="messagesDropdown">
+                                <h6 class="message-center">
+                                    Message Center
+                                </h6>
+                                <a *ngFor="let message of receivedMessages" class="message" href="#">
+                                    <div class="font-weight-bold">
+                                    <p class="message-individual">{{ message }}</p>
+                                    </div>
+                                </a>
+                                </div>
+                            </div>
                           </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -292,6 +304,7 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

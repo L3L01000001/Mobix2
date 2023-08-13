@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { AdminMessageService } from '../../shared/admin-message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -10,15 +11,12 @@ import { AdminMessageService } from '../../shared/admin-message.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  zaprimljenePoruke: string[] = [];
+  receivedMessages: string[] = [];
   odabraniUser: any = null;
   adminEmail:string|null=null;
   dozvoljeno:boolean=false;
-  constructor(private adminMessageService: AdminMessageService, private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public authService: AuthService) {
-    this.adminMessageService.zaprimljenaPoruka.subscribe((message: string) => {
-      this.zaprimljenePoruke.push(message);
-    });
-   }
+  constructor(private adminMessageService: AdminMessageService, private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public authService: AuthService) {}
+
 
   // testirajWebApi(): void {
   //   this.httpClient.get(
@@ -30,10 +28,20 @@ export class AdminComponent implements OnInit {
   // }
   
   ngOnInit(): void {
-    if(this.authService.getUserRole=="Admin")
-      this.dozvoljeno=true;
-    else
-      this.dozvoljeno=false;
+    if (this.authService.getUserRole === "Admin") {
+      this.dozvoljeno = true;
+      this.adminMessageService.getPorukeOdApija().subscribe(
+        (messages) => {
+          this.receivedMessages = messages;
+          console.log(this.receivedMessages)
+        },
+        (error) => {
+          console.error('Error fetching received messages:', error);
+        }
+      );
+    } else {
+      this.dozvoljeno = false;
+    }
   }
 
   showAdminMessages: boolean = false;

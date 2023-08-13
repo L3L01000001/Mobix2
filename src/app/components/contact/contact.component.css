@@ -9,3 +9,8 @@
 .contact-form{
     color: palevioletred;
 }
+
+.btn:hover{
+    color: white;
+    background-color: palevioletred;
+}
