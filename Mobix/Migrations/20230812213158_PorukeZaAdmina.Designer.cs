@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobix.Data;
 
@@ -11,9 +12,10 @@ using Mobix.Data;
 namespace Mobix.Migrations
 {
     [DbContext(typeof(MobixDbContext))]
-    partial class MobixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230812213158_PorukeZaAdmina")]
+    partial class PorukeZaAdmina
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace Mobix.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "fd4e0c5c-12d6-4ddd-819a-a83a4ce38052",
+                            ConcurrencyStamp = "104a3515-1ce0-45b1-aa80-ddce83be9cc0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "0d9efd98-aa34-4d04-b23c-e808fea167e1",
+                            ConcurrencyStamp = "f7b5022f-8987-4b71-a66f-399ea626f8ac",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -299,14 +301,14 @@ namespace Mobix.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c297a35-77af-46ec-b2a9-9a09e090f8ab",
+                            ConcurrencyStamp = "a5deb19c-9bb6-4b9e-9b5b-9010b06b8e11",
                             Email = "admin@mobix.com",
                             EmailConfirmed = true,
                             Ime = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MOBIX.COM",
                             NormalizedUserName = "ADMIN@MOBIX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBeQriGX1FSxwyN76JxDCMtOT4O/Ip52Gx601/l70ITA7i4VX4ko9insWsVXQw0cIQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB6r73uHjvBp5eyvImqLfvhkAbF3FrRWl4U9rKe2n3Z5XMY2MX6JschAH215rNtcNQ==",
                             PhoneNumberConfirmed = false,
                             Prezime = "Admin",
                             SecurityStamp = "",
@@ -317,14 +319,14 @@ namespace Mobix.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52b6eb2a-3fad-4c89-ad5d-ee9cca4736e6",
+                            ConcurrencyStamp = "4fc2ac6b-d27c-4680-ab77-aa77b83d9a79",
                             Email = "korisnik@mobix.com",
                             EmailConfirmed = true,
                             Ime = "Korisnik",
                             LockoutEnabled = false,
                             NormalizedEmail = "KORISNIK@MOBIX.COM",
                             NormalizedUserName = "KORISNIK@MOBIX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENgG8W90ORf4CMI2F1OEcd4WaAbTxJjFsZrVkpswbGtBxoQ9GAXFphnEDdBPyV/brg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIgQ+1Zcm/ed7tui8y9LNq2L3stBOGGknBHMw2NcpvPiti8iJLK6aa2wBb//pe4IIw==",
                             PhoneNumberConfirmed = false,
                             Prezime = "Korisnik",
                             SecurityStamp = "",
