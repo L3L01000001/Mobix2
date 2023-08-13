@@ -14,6 +14,7 @@ export class AuthService {
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {
     this.isLoggedIn = this.checkTokenValidity();
+    console.log(this.isLoggedIn)
   }
 
   checkTokenValidity(): boolean {
@@ -24,6 +25,9 @@ export class AuthService {
     if (!this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     return false;
   }
 

@@ -22,6 +22,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import {MatInputModule} from '@angular/material/input';
 import {NgFor} from '@angular/common';
@@ -33,6 +34,8 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
+import { AlertComponent } from './helpers/alert/alert.component';
 
 const jwtOptions: JwtModuleOptions = {
   config: {
@@ -61,6 +64,8 @@ const jwtOptions: JwtModuleOptions = {
     UserEditComponent,
     RegisterComponent,
     ProductAddComponent,
+    AdminMessagesComponent,
+    AlertComponent,
     
   ],
   imports: [
@@ -72,6 +77,7 @@ const jwtOptions: JwtModuleOptions = {
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule, 
+    MatSnackBarModule,
     MatDividerModule,
     JwtModule.forRoot(jwtOptions)
   ],
