@@ -55,6 +55,23 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
             .GetBytes(jwtSettings.GetSection("securityKey").Value))
     };
+    //options.Events = new JwtBearerEvents
+    //{
+    //    OnMessageReceived = context =>
+    //    {
+    //        var accessToken = context.Request.Query["access_token"];
+
+    //        // If the request is for our hub...
+    //        var path = context.HttpContext.Request.Path;
+    //        if (!string.IsNullOrEmpty(accessToken) &&
+    //            (path.StartsWithSegments("/Hubs/contactHub")))
+    //        {
+    //            // Read the token out of the query string
+    //            context.Token = accessToken;
+    //        }
+    //        return Task.CompletedTask;
+    //    }
+    //};
 })
 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
 {
@@ -68,7 +85,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
         {
-            builder.WithOrigins("https://localhost:44351", "http://localhost:4200")
+            builder.WithOrigins("https://localhost:44351", "https://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
 
@@ -103,7 +120,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(builder =>
 {
     builder
-    .WithOrigins("https://localhost:44351", "http://localhost:4200", "http://localhost:7278")
+    .WithOrigins("https://localhost:44351", "https://localhost:4200", "http://localhost:7278", "http://localhost:4200")
     .AllowAnyMethod()
     .AllowAnyHeader();
 });

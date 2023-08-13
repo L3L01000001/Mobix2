@@ -3,21 +3,29 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Mobix.Data;
+using Mobix.EntityModels;
 
 namespace SignalR.Hubs
 {
     //[Authorize]
     public class ContactHub : Hub
     {
-        //private readonly MobixDbContext _db;
+        private readonly MobixDbContext _db;
 
-        //public ContactHub(MobixDbContext db)
-        //{
-        //    _db = db;
-        //}
+        public ContactHub(MobixDbContext db)
+        {
+            _db = db;
+        }
 
         public async Task SendMessage(string message)
         {
+            var poruka = new PorukeZaAdmina
+            {
+                Sadrzaj = message
+            };
+
+            _db.PorukeZaAdmina.Add(poruka);
+            await _db.SaveChangesAsync();
             await Clients.All.SendAsync("ReceiveMessage", message);
         }
 

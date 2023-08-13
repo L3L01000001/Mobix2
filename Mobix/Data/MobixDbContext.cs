@@ -13,6 +13,8 @@ namespace Mobix.Data
         public DbSet<Dobavljac> Dobavljaci { get; set; }
         public DbSet<Korpa> Korpa { get; set; }
         public DbSet<KorpaStavke> KorpaStavke { get; set; }
+
+        public DbSet<PorukeZaAdmina> PorukeZaAdmina { get; set; }
         public MobixDbContext(DbContextOptions<MobixDbContext> options)
            : base(options)
         {
