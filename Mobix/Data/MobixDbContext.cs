@@ -39,7 +39,8 @@ namespace Mobix.Data
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Test123."),
                 SecurityStamp = string.Empty,
-                Prezime = "Admin"
+                Prezime = "Admin",
+                UserRole = "Admin"
             });
 
             modelBuilder.Entity<Korisnik>().HasData(new Korisnik
@@ -53,7 +54,8 @@ namespace Mobix.Data
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Test123."),
                 SecurityStamp = string.Empty,
-                Prezime = "Korisnik"
+                Prezime = "Korisnik",
+                UserRole = "Korisnik"
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { UserId = "1", RoleId = "1" });

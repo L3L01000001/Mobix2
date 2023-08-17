@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobix.Data;
 
@@ -11,9 +12,10 @@ using Mobix.Data;
 namespace Mobix.Migrations
 {
     [DbContext(typeof(MobixDbContext))]
-    partial class MobixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230814220210_emailconftoken")]
+    partial class emailconftoken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace Mobix.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "1b2a7b32-2fe3-4f8d-9648-d3da930c05c6",
+                            ConcurrencyStamp = "84fd883b-90f7-46ad-b847-3199904ad2a2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "e1ae5aba-1c12-4025-93ae-851481756394",
+                            ConcurrencyStamp = "ffa0d82f-2bf7-4a5e-ac6e-f592d96e285d",
                             Name = "Korisnik",
                             NormalizedName = "KORISNIK"
                         });
@@ -302,39 +304,37 @@ namespace Mobix.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dff8e60f-33d1-43d5-af5c-87cb970a7c2e",
+                            ConcurrencyStamp = "c08ca568-e0c0-4693-aa08-1b57a3fea7af",
                             Email = "admin@mobix.com",
                             EmailConfirmed = true,
                             Ime = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MOBIX.COM",
                             NormalizedUserName = "ADMIN@MOBIX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENbLLXLqE6CjPR4PwNMBKliUD8n3pnqrSwFkjEHd73p4O2rNZPc0UXJXB/V8qkGDEw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEINeyF+3Vjl8ZWN98F/kSJWLcWBVNLfi0PghrOPvZ9egkCIRinMg/ahg5bjOLOSMHg==",
                             PhoneNumberConfirmed = false,
                             Prezime = "Admin",
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mobix.com",
-                            UserRole = "Admin"
+                            UserName = "admin@mobix.com"
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a64b955-abfa-4e84-9609-fe1bbe5ffc49",
+                            ConcurrencyStamp = "6bf80d37-6856-4175-afc2-c6ea39da7a69",
                             Email = "korisnik@mobix.com",
                             EmailConfirmed = true,
                             Ime = "Korisnik",
                             LockoutEnabled = false,
                             NormalizedEmail = "KORISNIK@MOBIX.COM",
                             NormalizedUserName = "KORISNIK@MOBIX.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEANtTqNGVCnU7scqLyhXDAZzXHHpYhfOQX1ww3sAvX7KUS2Ot4eCmT4U0LZVBvOF3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK7O3y0FoAFM8xZUfV5tOcbs6FbhGvj7ADHK/mNTaXBDCBZowxhvJCVkskIe6NQtoQ==",
                             PhoneNumberConfirmed = false,
                             Prezime = "Korisnik",
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "korisnik@mobix.com",
-                            UserRole = "Korisnik"
+                            UserName = "korisnik@mobix.com"
                         });
                 });
 
