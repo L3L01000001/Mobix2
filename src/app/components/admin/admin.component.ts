@@ -10,8 +10,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
   receivedMessages: string[] = [];
+  receivedMessageSubscription: Subscription | undefined;
   odabraniUser: any = null;
   adminEmail:string|null=null;
   dozvoljeno:boolean=false;
@@ -30,7 +31,14 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.getUserRole === "Admin") {
       this.dozvoljeno = true;
-      this.adminMessageService.getPorukeOdApija().subscribe(
+      this.adminMessageService.getPorukeOdApija().subscribe(messages => {
+        this.receivedMessages = messages;
+      });
+
+    this.receivedMessageSubscription = this.adminMessageService.receivedMessage$.subscribe(message => {
+      this.receivedMessages.push(message);
+    });
+      /* this.adminMessageService.getPorukeOdApija().subscribe(
         (messages) => {
           this.receivedMessages = messages;
           console.log(this.receivedMessages)
@@ -38,9 +46,15 @@ export class AdminComponent implements OnInit {
         (error) => {
           console.error('Error fetching received messages:', error);
         }
-      );
+      ); */
     } else {
       this.dozvoljeno = false;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.receivedMessageSubscription) {
+      this.receivedMessageSubscription.unsubscribe();
     }
   }
 

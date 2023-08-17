@@ -59,6 +59,9 @@ export class AdminMessageService {
     return this.httpClient.get<string[]>("https://localhost:7278/api/messages");
   }
 
+  getStoredMessages(): string[] {
+    return this.poruke;
+  }
 
 
 }
