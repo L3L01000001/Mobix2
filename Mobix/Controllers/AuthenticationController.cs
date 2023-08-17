@@ -9,6 +9,7 @@ using System.Security.Claims;
 using Mobix.JwtFeatures;
 using Mobix.DTO;
 using System.IdentityModel.Tokens.Jwt;
+using Mobix.EmailServis;
 
 namespace Mobix.Controllers
 {
@@ -20,24 +21,80 @@ namespace Mobix.Controllers
         private readonly UserManager<Korisnik> _userManager;
         private readonly MobixDbContext _db;
         private readonly JwtHandler _jwtHandler;
+        private readonly EmailService _emailService;
 
-        public AuthenticationController(SignInManager<Korisnik> signInManager, UserManager<Korisnik> userManager, MobixDbContext db, JwtHandler jwtHandler)
+        public AuthenticationController(SignInManager<Korisnik> signInManager, UserManager<Korisnik> userManager, MobixDbContext db, JwtHandler jwtHandler, EmailService emailService)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _db = db;
             _jwtHandler = jwtHandler;
+            _emailService = emailService;
         }
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
-        //{
-        //    // TODO: Implement user registration logic using _userManager and _dbContext
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegistracijaVM registracija)
+        {
+            if (!ModelState.IsValid || registracija == null)
+            {
+                return new BadRequestObjectResult(new { Message = "Invalid registration data" });
+            }
 
-        //    return Ok();
-        //}
+            var noviKorisnik = new Korisnik
+            {
+                Ime = registracija.Ime,
+                Prezime = registracija.Prezime,
+                UserName = registracija.Email,
+                Email = registracija.Email,
+                EmailConfirmed = false,
+                UserRole = "Korisnik",
+                EmailVerificationToken = Guid.NewGuid().ToString(),
+            };
 
-        // Action for user login
+            var createResult = await _userManager.CreateAsync(noviKorisnik, registracija.Password);
+
+            if (createResult.Succeeded)
+            {
+                // slanje konfirmacijskog maila
+                var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = noviKorisnik.Id, token = noviKorisnik.EmailVerificationToken }, Request.Scheme);
+                var emailContent = $"Please confirm your email by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>";
+                await _emailService.SendEmailAsync(noviKorisnik.Email, "Confirm Your Email", emailContent);
+
+                // poruka za uspjeh registracije
+                return Ok("Registration successful. Please check your email to confirm.");
+            }
+            else
+            {
+                return new BadRequestObjectResult(new { Message = "Registration failed" });
+            }
+        }
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return BadRequest("Invalid confirmation link.");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return Ok("Email confirmed"); 
+            }
+            else
+            {
+                return BadRequest("Error"); 
+            }
+        }
+
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginVM model)
         {
@@ -82,18 +139,13 @@ namespace Mobix.Controllers
                 return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
             }
 
-            
-            
             else
             {
                 return BadRequest("Something went wrong");
             }
 
-
-
         }
 
-        // Action for user logout
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {

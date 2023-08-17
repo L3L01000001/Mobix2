@@ -31,13 +31,11 @@ namespace SignalR.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            // This method is called when a client connects
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            // This method is called when a client disconnects
             await base.OnDisconnectedAsync(exception);
         }
 

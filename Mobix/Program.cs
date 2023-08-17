@@ -6,6 +6,8 @@ using Mobix.EntityModels;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using FluentEmail;
+using FluentEmail.Mailgun;
 using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,6 +16,7 @@ using System.Data;
 using SignalR.Hubs;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.OpenApi.Models;
+using Mobix.EmailServis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +34,10 @@ builder.Services.AddDbContext<MobixDbContext>(options =>
 options.UseSqlServer(
                    builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<Korisnik, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<Korisnik, IdentityRole>(options => {
+    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedEmail = true;
+})
                 .AddEntityFrameworkStores<MobixDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -80,6 +86,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddScoped<JwtHandler>();
+builder.Services.AddScoped<EmailService>();
 
 builder.Services.AddCors(options =>
 {

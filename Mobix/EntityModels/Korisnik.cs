@@ -11,6 +11,7 @@ namespace Mobix.EntityModels
         public string? Ime { get; set; }
         public string? Prezime { get; set; }
         public string? UserRole { get; set; }
+        public string? EmailVerificationToken { get; set; }
         //public ICollection<IdentityRole> Uloge { get; set; }
     }
 }
