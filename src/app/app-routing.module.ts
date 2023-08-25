@@ -13,6 +13,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RegistrationSuccessComponent } from './components/registration-success/registration-success.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'registration-success',
+    component: RegistrationSuccessComponent
   },
   {
     path: 'login',

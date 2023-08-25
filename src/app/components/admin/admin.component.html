@@ -262,6 +262,7 @@
                                 <a *ngFor="let message of receivedMessages" class="message" href="#">
                                     <div class="font-weight-bold">
                                     <p class="message-individual">{{ message }}</p>
+                                    <a class="replyButton" href="mailto:{{ extractEmailAddressFromMessage(message) }}">Reply</a>
                                     </div>
                                 </a>
                                 </div>

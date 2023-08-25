@@ -1,0 +1,9 @@
+.register-form{
+    margin-top: 60px;
+    color: palevioletred;
+}
+
+.btn:hover{
+    color: white;
+    background-color: palevioletred;
+}
