@@ -56,12 +56,12 @@ namespace Mobix.Controllers
             if (createResult.Succeeded)
             {
                 // slanje konfirmacijskog maila
-                var confirmationLink = Url.Action("ConfirmEmail", "Account", new { userId = noviKorisnik.Id, token = noviKorisnik.EmailVerificationToken }, Request.Scheme);
+                var confirmationLink = Url.Action("ConfirmEmail", "Authentication", new { userId = noviKorisnik.Id, token = noviKorisnik.EmailVerificationToken }, Request.Scheme);
                 var emailContent = $"Please confirm your email by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>";
                 await _emailService.SendEmailAsync(noviKorisnik.Email, "Confirm Your Email", emailContent);
 
                 // poruka za uspjeh registracije
-                return Ok("Registration successful. Please check your email to confirm.");
+                return Ok(new { Message = "Registration successful. Please check your email to confirm."});
             }
             else
             {
@@ -83,15 +83,11 @@ namespace Mobix.Controllers
                 return BadRequest("User not found.");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                return Ok("Email confirmed"); 
-            }
-            else
-            {
-                return BadRequest("Error"); 
-            }
+            user.EmailConfirmed = true;
+            user.EmailVerificationToken = null;
+            await _userManager.UpdateAsync(user);
+
+            return Ok("Email confirmed successfully!");
         }
 
 
@@ -105,6 +101,10 @@ namespace Mobix.Controllers
 
             var identityUser = await _userManager.FindByNameAsync(model.Email);
             var identityUser1 = await _userManager.FindByEmailAsync(model.Email);
+            if(identityUser.EmailConfirmed == false)
+            {
+                return BadRequest("Email is not confirmed");
+            }
             if (identityUser == null)
             {
                 var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser1, identityUser1.PasswordHash, model.Password);
