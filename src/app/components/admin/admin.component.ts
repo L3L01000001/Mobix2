@@ -64,4 +64,15 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.showAdminMessages = !this.showAdminMessages;
   }
 
+  extractEmailAddressFromMessage(message: string): string | null {
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const match = message.match(emailRegex);
+    
+    if (match && match.length > 0) {
+        return match[0];
+    } else {
+        return null;
+    }
+}
+
 }

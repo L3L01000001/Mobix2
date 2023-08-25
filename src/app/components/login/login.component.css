@@ -13,3 +13,8 @@
 .checkbox {
     padding-left: 15px;
 }
+
+.btn:hover{
+    color: white;
+    background-color: palevioletred;
+}
