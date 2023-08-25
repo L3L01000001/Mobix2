@@ -14,19 +14,32 @@ namespace Mobix.EmailServis
         public EmailService(IConfiguration configuration)
         {
             _configuration = configuration;
-            FluentEmail.Core.Email.DefaultSender = new MailgunSender(
-                _configuration["Mailgun:ApiKey"],
-                _configuration["Mailgun:Domain"]);
         }
 
         public async Task SendEmailAsync(string toEmail, string subject, string content)
         {
-                var email = FluentEmail.Core.Email
-                    .From("mobix.shop5@mailgun.org")
-                    .To(toEmail)
-                    .Subject(subject)
-                    .Body(content)
-                    .Send();
+            var smtpHost = _configuration["SmtpSettings:Host"];
+            var smtpPort = int.Parse(_configuration["SmtpSettings:Port"]);
+            var smtpUsername = _configuration["SmtpSettings:Username"];
+            var smtpPassword = _configuration["SmtpSettings:Password"];
+
+            var smtpClient = new SmtpClient(smtpHost, smtpPort)
+            {
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+                EnableSsl = true
+            };
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(smtpUsername),
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = content
+            };
+
+            mailMessage.To.Add(toEmail);
+
+            await smtpClient.SendMailAsync(mailMessage);
         }
     }
 }
