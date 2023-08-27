@@ -14,6 +14,7 @@ export class CatalogComponent implements OnInit {
   editable:boolean =false;
   lokalniEmail:any=localStorage.getItem('email');
   odabraniProizvod: any = null;
+  showModal = false;
   constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public authService: AuthService){}
 
   testirajWebApi(): void {
@@ -80,6 +81,36 @@ export class CatalogComponent implements OnInit {
 
   noviProizvod(){
     this.router.navigate(['/product-add']);
+  }
+
+  prikaziModal(p: any){
+    this.odabraniProizvod = p;
+    this.showModal = true;
+  }
+
+  obrisiProizvod() {
+    this.httpClient.delete( "https://localhost:7278/api/delete/" + this.odabraniProizvod.proizvodID).subscribe(
+      () => {
+        const index = this.proizvodi.findIndex( p => p.proizvodID === this.odabraniProizvod.proizvodID);
+        if (index !== -1) {
+          this.proizvodi.splice(index, 1);
+        }
+        this.zatvoriModal();
+      },
+      error => {
+        console.error('Error deleting product:', error);
+        this.zatvoriModal();
+      }
+    );
+    this.testirajWebApi();
+  }
+
+  zatvoriModal() {
+    this.showModal = false;
+    this.odabraniProizvod = null;
+  }
+  otkaziDelete() {
+    this.zatvoriModal();
   }
 
 }
