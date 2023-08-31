@@ -81,7 +81,7 @@ namespace Mobix.Controllers
                 _db.Update(odabraniProizvod);
                 _db.SaveChanges();
             }
-            return Ok("Uspješno spašen " + odabraniProizvod);
+            return Ok(odabraniProizvod);
 
         }
 
