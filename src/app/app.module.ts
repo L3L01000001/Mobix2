@@ -37,6 +37,7 @@ import { ProductAddComponent } from './components/product-add/product-add.compon
 import { AdminMessagesComponent } from './components/admin-messages/admin-messages.component';
 import { AlertComponent } from './helpers/alert/alert.component';
 import { RegistrationSuccessComponent } from './components/registration-success/registration-success.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 const jwtOptions: JwtModuleOptions = {
   config: {
@@ -68,6 +69,7 @@ const jwtOptions: JwtModuleOptions = {
     AdminMessagesComponent,
     AlertComponent,
     RegistrationSuccessComponent,
+    PaginationComponent,
     
   ],
   imports: [

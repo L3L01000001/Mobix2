@@ -1,5 +1,5 @@
 .wrap_carousel {
   margin:auto;
   width:80%;
-  height: calc((50vw - 40px) * 0.8 / 3 * 2);
+  /* height: calc((50vw - 40px) * 0.8 / 3 * 2); */
 } 

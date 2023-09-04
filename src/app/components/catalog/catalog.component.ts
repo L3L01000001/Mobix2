@@ -31,22 +31,49 @@ export class CatalogComponent implements OnInit {
       });
     });
   }
+
+  currentPage: number = 1;
+  itemsPerPage: number = 3;
+  total: number = 0;
+  totalPages: number = 0;
+  onPageChange(pageNumber: number) {
+    this.currentPage = pageNumber;
+    this.getProizvodiPaging();
+  }
+
+  calculateTotal(): void {
+    this.httpClient
+      .get(`https://localhost:7278/api/get-all-products`)
+      .subscribe((res: any) => {
+        this.total = res.length;
+        this.totalPages = Math.ceil(this.total / this.itemsPerPage);
+      });
+  }
+  getProizvodiPaging (): void {
+    this.httpClient.get( "https://localhost:7278/" + `api/get-all-products-paging?pageNumber=${this.currentPage}&pageSize=${this.itemsPerPage}`)
+    .subscribe(res => {
+      this.proizvodi = res;
+      this.proizvodi.forEach((proizvod: any) => {
+        if (!proizvod.slikaProizvoda.startsWith("http")) {
+          proizvod.slikaProizvoda = "https://localhost:7278/Images/" + proizvod.slikaProizvoda;
+        }
+      });
+    });
+  }
   
   ngOnInit(): void {
-   this.testirajWebApi();
+   this.calculateTotal();
+   this.getProizvodiPaging();
    this.authService.login(this.lokalniEmail);
    this.editable=false;
   }
 
   changeEditState(): void {
-    
       this.editable=!this.editable;
       if(this.editable==true)
       document.getElementById('accentEdit')!.innerHTML="Edit ON";
       else
       document.getElementById('accentEdit')!.innerHTML="Edit OFF";
-    
-
    }
 
   search(): void {
