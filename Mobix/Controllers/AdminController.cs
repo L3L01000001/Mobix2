@@ -31,6 +31,18 @@ namespace Mobix.Controllers
             return data.ToList();
         }
 
+        [HttpGet("get-all-products-paging")]
+        public ActionResult<List<Proizvod>> GetAllProductsPaging(int pageNumber = 1, int pageSize = 3)
+        {
+            int skip = (pageNumber - 1) * pageSize;
+
+            var proizvodi = _db.Proizvodi
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            return Ok(proizvodi);
+        }
 
         [HttpPut("edit-proizvod/{id}")]
         public IActionResult EditProizvod(int id, [FromForm] ProizvodVM podaci)
