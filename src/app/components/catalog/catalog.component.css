@@ -79,3 +79,9 @@
     cursor: pointer;
     border: none;
   }
+
+  .pagination {
+    height: 60px;
+    width: 100%;
+    justify-content: center;
+  }

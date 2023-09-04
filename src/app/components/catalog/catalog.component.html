@@ -37,6 +37,11 @@
               <hr>
           </div>
       </div>
+      <app-pagination class="pagination"
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     </div>
   </div>
   <div *ngIf="showModal" class="modal">
