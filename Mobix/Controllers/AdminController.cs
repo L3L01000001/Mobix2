@@ -44,6 +44,32 @@ namespace Mobix.Controllers
             return Ok(proizvodi);
         }
 
+        [HttpGet("get-all-products-sorting")]
+        public IActionResult GetProducts(string sortBy = "cijena-asc")
+        {
+            var proizvodi = _db.Proizvodi.AsQueryable().ToList();
+
+            switch (sortBy.ToLower())
+            {
+                case "cijena-asc":
+                    proizvodi = proizvodi.OrderBy(p => p.Cijena).ToList();
+                    break;
+                case "cijena-desc":
+                    proizvodi = proizvodi.OrderByDescending(p => p.Cijena).ToList();
+                    break;
+                case "novo":
+                    proizvodi = proizvodi.Where(p => p.Stanje == "Novo").ToList();
+                    break;
+                case "polovno":
+                    proizvodi = proizvodi.Where(p => p.Stanje == "Polovno").ToList();
+                    break;
+                default:
+                    return BadRequest("Sortiranje nemoguce.");
+            }
+
+            return Ok(proizvodi);
+        }
+
         [HttpPut("edit-proizvod/{id}")]
         public IActionResult EditProizvod(int id, [FromForm] ProizvodVM podaci)
         {
