@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="korpa" *ngIf="korpa">
+    <h2 style="color: palevioletred;text-align: center;">Your Cart</h2>
+    <hr>
+    <ul style="padding: 10px;">
+      <li class="korpaStavka" *ngFor="let item of korpa.korpaStavke">
+        <!-- Display cart item details here -->
+        <p class="naziv">{{ item.proizvod.naziv }}</p>
+        <p class="cijena">{{ item.proizvod.cijena }}KM</p>
+        <img src="{{item.proizvod.slikaProizvoda}}" height="100px" width="100px" alt="...">
+        <div class="container-za-kolicinu"> 
+            <button class="kolicina-button" (click)="povecajKolicinu(item)">
+                <span>+</span>
+            </button>
+            <span>{{ item.kolicina }}</span>
+            <button class="kolicina-button" (click)="smanjiKolicinu(item)">
+                <span>-</span>
+            </button>
+        </div>
+        <button class="delete-button" (click)="obrisiStavku(item.id)">
+            <img src="../../assets/icons8-delete-48.png" />
+        </button>
+      </li>
+    </ul>
+    <div class="ukupno">
+        <p style="margin-bottom: 0;">Total: {{ukupnaCijena()}} KM</p>
+        <button class="button-checkout">Proceed to checkout</button>
+    </div>
+</div>
+<div class="praznaKorpa" *ngIf="korpaPrazna">
+    <p class="praznaKorpa__text">Cart is empty, fill it up!</p>
+<div>
+  
+  
+  
+  
+  

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ActivatedRoute,Router } from '@angular/router';
+import { CartService } from './cart-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,10 @@ export class AuthService {
   adminUser=false;
   userName = '';
   getUserRole='';
+  korisnikId: string | null = null;
 
-  constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router) {
+  constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private router: Router, private cartService: CartService) {
     this.isLoggedIn = this.checkTokenValidity();
-    console.log(this.isLoggedIn)
   }
 
   checkTokenValidity(): boolean {
@@ -28,13 +29,21 @@ export class AuthService {
     localStorage.removeItem('email');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('id');
     return false;
   }
+
+  setKorisnikId() {
+    this.korisnikId = localStorage.getItem('id');
+  }
+  
 
   login(username: string) {
     this.isLoggedIn = this.checkTokenValidity();
     this.userName = username;
     this.getUserRole=localStorage.getItem('role')!;
+    this.setKorisnikId();
+    this.cartService.updateCartItemCountUser(this.korisnikId ?? '');
     console.log(this.getUserRole);
     if(this.getUserRole=="Admin")
       this.adminUser=true;
@@ -42,16 +51,6 @@ export class AuthService {
       this.adminUser=false;
     else 
       this.adminUser=false;
-    // if(this.getUserRole=="Admin")
-    //   this.adminUser=true;
-    
-
-
-    // this.http.post<any>('https://localhost:7278/api/Login', this.userName).subscribe(res=>{
-    //   localStorage.setItem('token', res.token);
-    //   localStorage.setItem('email', username);
-    //   this.getUserRole=res.role;
-    // })
   }
 
   checkAdminStatus():boolean{
@@ -63,15 +62,19 @@ export class AuthService {
 
   logout() {
     this.http.post('https://localhost:7278/api/Logout', {}).subscribe(() => {
+      this.cartService.updateCartItemCount(0);
       this.isLoggedIn = false;
       this.userName = '';
       localStorage.removeItem('email');
       localStorage.removeItem('token');
       localStorage.removeItem('role');
+      localStorage.removeItem('id');
       this.adminUser=false;
       this.router.navigate(['/login']);
     });
   }
 
-
+  getKorisnikId(): string | null {
+    return this.korisnikId;
+  }
 }

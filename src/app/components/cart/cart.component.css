@@ -1,0 +1,228 @@
+@media(min-width:900px){
+    .praznaKorpa{
+         width:100%;
+         height: 300px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+    }
+
+    .korpa{
+        width:100%;
+        height: 300px;
+        display: inline-table;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .praznaKorpa__text{
+        color:palevioletred;
+        font-size: 30px;
+    }
+
+    .naziv{
+        margin-bottom: auto;
+        margin-top: auto; 
+        width: 300px;
+        padding-left: 25px;
+    }
+
+    .cijena{
+        margin-bottom: auto;
+        margin-top: auto; 
+        width:300px;
+    }
+
+    .korpaStavka{
+        display: inline-flex;
+        width: 100%;
+        background: palevioletred;
+        margin-bottom: 30px;
+        height: 130px;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 25px;
+        font-weight: 400;
+        color: snow;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .ukupno{
+        width:100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        color: #0a6dc1;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .button-checkout{
+        height: auto; 
+        width: fit-content; 
+        border: 0;
+        border-radius: 7px;
+        padding: 10px;
+        background: white;
+        background-color: #0a6dc1 !important;
+        color: white;
+        border: 1px solid palevioletred;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 400;
+        margin-right: 30px;
+        margin-left: 30px;
+        cursor: pointer;
+    }
+
+    .button-checkout:hover{
+        background-color:white !important;
+        color: palevioletred;
+        border: 1px solid palevioletred;
+    }
+
+    .delete-button{
+        margin-right: 60px;
+        border-radius: 70px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: auto;
+        cursor: pointer;
+        background: #8b00002b;
+    }
+
+    .delete-button:hover{
+        border: 2px solid white;
+    }
+
+    .container-za-kolicinu{
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 300px;
+        margin-right: auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    .kolicina-button{
+        border-radius: 20px;
+        border: none;
+        width: 50px;
+        height: auto;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+@media((min-width:360px) and (max-width:900px)){
+    .korpa{
+        width:100%;;
+        height: fit-content;
+        display: inline-table;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .praznaKorpa{
+        width:100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:palevioletred;
+   }
+    .korpaStavka{
+        width: 100%;
+        background: palevioletred;
+        margin-bottom: 30px;
+        height: 200px;
+        border-radius: 10px;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 15px;
+        font-size: 20px;
+        font-weight: 400;
+        color: snow;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .naziv{
+        margin-bottom: auto;
+        margin-top: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .cijena{
+        margin-bottom: auto;
+        margin-top: auto; 
+        width:300px;
+        text-align: center;
+    }
+
+    .ukupno{
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        color: #0a6dc1;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .button-checkout{
+        height: auto; 
+        width: fit-content; 
+        border: 0;
+        border-radius: 7px;
+        padding: 10px;
+        background: white;
+        background-color: #0a6dc1 !important;
+        color: white;
+        border: 1px solid palevioletred;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 400;
+        margin-right: 30px;
+        margin-left: 30px;
+        cursor: pointer;
+        float: right;
+    }
+
+    .button-checkout:hover{
+        background-color:white !important;
+        color: palevioletred;
+        border: 1px solid palevioletred;
+    }
+
+    .delete-button{
+        border-radius: 70px;
+        position: relative;
+        top: 50px;
+        left: 100px;
+        float: right;
+        cursor: pointer;
+        background: #8b00002b;
+    }
+
+    .delete-button:hover{
+        border: 2px solid white;
+    }
+
+    .container-za-kolicinu{
+        float:right;
+        margin-right: auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    .kolicina-button{
+        border-radius: 20px;
+        border: none;
+        width: 50px;
+        height: auto;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

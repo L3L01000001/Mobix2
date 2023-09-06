@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', res.token);
       localStorage.setItem('email',this.model.email);
       localStorage.setItem('role', res.role);
+      localStorage.setItem('id', res.korisnikId)
       var roleUser=localStorage.getItem('role');
       // console.log(res.token)
       this.authService.login(this.model.email);
