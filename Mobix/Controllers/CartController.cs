@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mobix.Data;
 using Mobix.EntityModels;
+using Mobix.Migrations;
 using System.Security.Claims;
 
 namespace Mobix.Controllers
@@ -27,17 +28,21 @@ namespace Mobix.Controllers
 
             if (korpa == null)
             {
-                return BadRequest("Korpa je trenutno prazna.");
+                return new BadRequestObjectResult(new { Message = "Korpa je prazna!" });
             }
 
             korpa.KorpaStavke.ForEach(ks => ks.Korpa = null);
 
 
-            return Ok(korpa);
+            return Ok(new
+            {
+                Korpa = korpa,
+                KorpaStavke = korpa.KorpaStavke
+            });
         }
 
         [HttpPost("dodaj")]
-        public IActionResult DodajUKorpu(int korisnikID, int proizvodID, int kolicina)
+        public IActionResult DodajUKorpu(int korisnikID, int proizvodID)
         {
             var korpa = _db.Korpa.Include(k => k.KorpaStavke).FirstOrDefault(k => k.KorisnikId == korisnikID);
 
@@ -47,29 +52,58 @@ namespace Mobix.Controllers
                 _db.Korpa.Add(korpa);
             }
 
-            var korpaStavka = new KorpaStavke
+            var postojecaKorpaStavka = korpa.KorpaStavke.FirstOrDefault(ks => ks.ProizvodID == proizvodID);
+            var proizvod = _db.Proizvodi.FirstOrDefault(p => p.ProizvodID == proizvodID);
+
+            if (postojecaKorpaStavka != null)
             {
-                Korpa = korpa,
-                ProizvodID = proizvodID,
-                Kolicina = kolicina
-            };
-            _db.KorpaStavke.Add(korpaStavka);
+                if(postojecaKorpaStavka.Kolicina < proizvod.Kolicina) { 
+                    postojecaKorpaStavka.Kolicina++;
+                    _db.KorpaStavke.Update(postojecaKorpaStavka);
+                } else
+                {
+                    return BadRequest("Nedovoljna kolicina proizvoda na stanju.");
+                }
+            }
+            else
+            {
+                var korpaStavka = new KorpaStavke
+                {
+                    Korpa = korpa,
+                    ProizvodID = proizvodID,
+                    Kolicina = 1
+                };
+                _db.KorpaStavke.Add(korpaStavka);
+            }
 
             _db.SaveChanges();
 
-            return Ok();
+            var totalKolicina = korpa.KorpaStavke.Sum(ks => ks.Kolicina);
+
+            return Ok(totalKolicina);
         }
 
-        [HttpPut("{korpaStavkaId}")]
-        public ActionResult izmijeni(int korpaStavkaId, int kolicina)
+        [HttpPut("updateKolicinu/{korpaStavkaId}")]
+        public ActionResult updateKolicinu(int korpaStavkaId, int kolicina)
         {
-            var korpaStavka = _db.KorpaStavke.FirstOrDefault(ks => ks.ID == korpaStavkaId);
+            var korpaStavka = _db.KorpaStavke
+                .Include(ks => ks.Proizvod)
+                .FirstOrDefault(ks => ks.ID == korpaStavkaId);
 
             if (korpaStavka == null)
             {
                 return BadRequest("Stavku nije moguce prikazati.");
             };
 
+            var proizvod = korpaStavka.Proizvod;
+            if(proizvod == null)
+            {
+                return BadRequest("Proizvod nije pronadjen.");
+            }
+            if(kolicina > proizvod.Kolicina)
+            {
+                return BadRequest("Nema dovoljno proizvoda na stanju.");
+            }
             korpaStavka.Kolicina = kolicina;
             _db.SaveChanges();
 
@@ -86,26 +120,20 @@ namespace Mobix.Controllers
                 return BadRequest("Stavka ne postoji.");
             };
 
+            var korpa = _db.Korpa.Include(k => k.KorpaStavke).FirstOrDefault(k => k.ID == korpaStavka.KorpaId);
+
+            if (korpa == null)
+            {
+                return BadRequest("Korpa ne postoji.");
+            }
+
             _db.KorpaStavke.Remove(korpaStavka);
+
+            
             _db.SaveChanges();
 
-            return Ok();
+            var trenutnaKolicina = korpa.KorpaStavke.Sum(ks => ks.Kolicina);
+            return Ok(trenutnaKolicina);
         }
-
-        //[HttpDelete("{korpaId}")]
-        //public ActionResult obrisi(int korpaStavkaId)
-        //{
-        //    var korpaStavka = _db.Korpa.FirstOrDefault(ks => ks.ID == korpaStavkaId);
-
-        //    if (korpaStavka == null)
-        //    {
-        //        return BadRequest("Stavka ne postoji.");
-        //    };
-
-        //    _db.Korpa.Remove(korpaStavka);
-        //    _db.SaveChanges();
-
-        //    return Ok();
-        //}
     }
 }
