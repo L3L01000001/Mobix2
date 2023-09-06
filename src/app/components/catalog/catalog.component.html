@@ -15,8 +15,8 @@
     <!-- </form> -->
   </div>
   <div class="container-fluid" style="margin-top:60px;">
-    <button id="accentEdit" *ngIf="authService.adminUser" mat-flat-button class="button" (click)="changeEditState()">Edit </button>
-    <button id="accentAdd" *ngIf="authService.adminUser" mat-flat-button class="button" (click)="noviProizvod()">Add New Product </button>
+    <button id="accentEdit" *ngIf="authService.adminUser" mat-flat-button class="button" style="float: right" (click)="changeEditState()">Edit </button>
+    <button id="accentAdd" *ngIf="authService.adminUser" mat-flat-button class="button" style="float: right" (click)="noviProizvod()">Add New Product </button>
     <div class="sort-container">
       <label for="sortSelect">Sort by:</label>
       <select id="sortSelect" [(ngModel)]="odabranaSortOpcija" (change)="onSortChange()">
@@ -35,7 +35,8 @@
               <h4 style="color:palevioletred; font-family: Helvetica; font-size: 17px; font-weight: 700; text-align:center; margin-top:10px;"><a>{{p.cijena}} KM</a></h4>
               <div class="buttons">
                 <div class="button-group">
-                  <a routerLink="/cart" class="btn" class="card-buttons">Add to Cart</a>
+                  <a class="btn" class="card-buttons" (click)="dodajUKorpu(p.proizvodID)">Add to Cart</a>
+                  <app-alert *ngIf="notLoggedIn" message="You need to log in in order to shop!" type="error"></app-alert>
                   <a [routerLink]="['/product-details', p.proizvodID]" class="btn" class="card-buttons">Read More</a>
                 </div>
               <a *ngIf="editable==true" [routerLink]="['/product-edit', p.proizvodID]" class="btn card-link" style="text-align:center; background-color:palevioletred; color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Edit</a>
@@ -43,7 +44,7 @@
               <hr>
           </div>
       </div>
-      <app-pagination class="pagination"
+      <app-pagination  *ngIf="!disablePagination" class="pagination"
         [currentPage]="currentPage"
         [totalPages]="totalPages"
         (pageChange)="onPageChange($event)"
@@ -57,6 +58,7 @@
       <button class="modal-button" (click)="otkaziDelete()">Cancel</button>
     </div>
   </div>
-
+  <app-alert *ngIf="maxKolicina" message="Out of stock!" type="error"></app-alert>
+  
 
   

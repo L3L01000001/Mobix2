@@ -24,12 +24,9 @@ export class IndexComponent implements OnInit {
 
   search(): void {
     if (this.filterProizvod !== '') {
-      this.httpClient.get<any[]>("https://localhost:7278/Search?proizvodSearch=" + this.filterProizvod)
-        .subscribe((x: any[]) => {
-          this.proizvodi = x;
-          console.log("search results:", x)
-          this.router.navigate(['/catalog']);
-        });
+      this.router.navigate(['/catalog'], {
+        queryParams: { proizvodSearch: this.filterProizvod }
+      });
     } else {
       this.router.navigate(['/catalog']);
     }

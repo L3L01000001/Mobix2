@@ -15,6 +15,7 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RegistrationSuccessComponent } from './components/registration-success/registration-success.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,10 @@ const routes: Routes = [
   }, {
     path: 'product-add',
     component: ProductAddComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
   }
 ];
 

@@ -47,7 +47,7 @@
 .dodaj-u-korpu {
     text-align:center; 
     background-color:rgb(216, 112, 147); 
-    color: white; 
+    color: white !important; 
     height: 45px; 
     width: 200px; 
     border-radius: 7px; 
@@ -58,7 +58,7 @@
 }
 
 .dodaj-u-korpu:hover {
-    color:palevioletred;
+    color:palevioletred !important;
     background-color: white;
     border: 1px solid palevioletred;
 }

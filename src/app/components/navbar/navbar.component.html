@@ -20,9 +20,6 @@
           <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
             <a class="nav-link" routerLink="/about">About</a>
           </li>
-          <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item">
-            <a class="nav-link" routerLink="/cart">Cart</a>
-          </li>
           <li [ngClass]="{'active': activeRoute === '/catalog'}" class="nav-item">
             <a class="nav-link" routerLink="/catalog">Catalog</a>
           </li>
@@ -44,7 +41,7 @@
           </li>
 
           <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/logout'}" class="nav-item">
-            <a class="nav-link"  (click)="btnLogout()" >Logout</a>
+            <a class="nav-link" style="cursor: pointer;" (click)="btnLogout()" >Logout</a>
           </li>
   
           <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
@@ -52,6 +49,12 @@
           </li>
           <li [ngClass]="{'active': activeRoute === '/index'}" class="nav-item">
             <a class="nav-link" routerLink="/index" (click)="isEnglish=true">ENG</a>
+          </li>
+          <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item" style="margin: auto;padding-left: 20px;">
+            <a routerLink="/cart" class="cart-link" style="color: white !important">
+              <i class="fa fa-shopping-cart"></i>
+              <span class="cart-count" style="top: -10px;position: relative;" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+            </a>
           </li>
 
         </ul>
@@ -106,16 +109,12 @@
         </ul>
       </div>
       </ng-template>
-  
       </div>
   </nav>
   <nav *ngIf="isMenuOpen" class="navbar-responsive">
     <ul  class="navbar-nav">
       <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
         <a class="nav-link" style="color:white" routerLink="/about">About</a>
-      </li>
-      <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item">
-        <a class="nav-link" style="color:white" routerLink="/cart">Cart</a>
       </li>
       <li [ngClass]="{'active': activeRoute === '/catalog'}" class="nav-item">
         <a class="nav-link" style="color:white" routerLink="/catalog">Catalog</a>
@@ -134,3 +133,9 @@
       </li>
     </ul>
   </nav>
+  <div class="cart-responsive" [ngClass]="{'active': activeRoute === '/cart'}">
+      <a routerLink="/cart" class="cart-link" style="color: white !important">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="cart-count" style="top: -10px;position: relative;" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
+  </div>

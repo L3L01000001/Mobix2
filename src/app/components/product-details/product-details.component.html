@@ -9,7 +9,7 @@
         <p class="cijena"> Stanje: {{ proizvod.stanje }} </p>
         <br>
 
-        <a routerLink="/cart" class="dodaj-u-korpu">Add to Cart</a>
+        <a class="dodaj-u-korpu" (click)="dodajUKorpu(proizvod.proizvodID)">Add to Cart</a>
         <br>
 
     </div>

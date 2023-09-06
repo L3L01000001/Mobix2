@@ -102,10 +102,22 @@
   .copyright-text {
     margin: 0
   }
+
+  .cartResponsive{
+    display: none;
+  }
   
   @media (max-width:991px) {
     .site-footer [class^=col-] {
       margin-bottom: 30px
+    }
+  }
+
+  @media (max-width:900px) {
+    .cart-responsive{
+      position: absolute;
+      top: 30px;
+      right: 90px;
     }
   }
   
