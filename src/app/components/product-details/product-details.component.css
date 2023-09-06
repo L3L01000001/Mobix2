@@ -2,10 +2,14 @@
     width: 100%;
     height: 1100px;
     margin-top:70px;
+    background: #ffdcec;
 }
 
 .slika-proizvoda {
-    height: auto;
+    height: 600px;
+    width: auto;
+    margin-top: 15px;
+    border: 1px solid palevioletred;
 }
 
 .naziv {
@@ -19,21 +23,25 @@
     position: relative;
     float: right;
     color:palevioletred;
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .text {
+    margin-top: 125px;
     position: relative;
     float: right;
     color:palevioletred;
-    right: 100px;
+    right: 125px;
     display: grid;
 }
 
 .opis {
     position: relative;
-    color:palevioletred;
-    font-size: 30px;
+    color: palevioletred;
+    background: white;
+    padding: 20px;
+    border: 1px solid;
+    font-size: 20px;
 }
 
 .dodaj-u-korpu {
@@ -46,4 +54,47 @@
     border: 0; 
     text-decoration: none;
     padding: 10px;
+    cursor: pointer;
+}
+
+.dodaj-u-korpu:hover {
+    color:palevioletred;
+    background-color: white;
+    border: 1px solid palevioletred;
+}
+
+@media(max-width:900px){
+
+    .container{
+        height: fit-content;
+    }
+    .slika-proizvoda {
+        height: 200px;
+        width: auto;
+        margin-top: 45px;
+        border: 1px solid palevioletred;
+    }
+
+    .text{
+        margin-top: 25px;
+        position: relative;
+        float: right;
+        right: 0;
+    }
+
+    .naziv{
+        position: relative;
+        float: right;
+        color: palevioletred;
+        font-size: 20px;
+    }
+    .cijena{
+        position: relative;
+        color:palevioletred;
+        font-size: 20px;
+    }
+
+    .opis{
+        margin-top: 60px;
+    }
 }

@@ -3,7 +3,10 @@
       <a class="navbar-brand" routerLink="/">
         <img src="../assets/Ikona.png" alt="logo" style="width:50px;height:50px;">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()">
         <span class="navbar-toggler-icon"></span>
       </button>
   
@@ -105,4 +108,29 @@
       </ng-template>
   
       </div>
+  </nav>
+  <nav *ngIf="isMenuOpen" class="navbar-responsive">
+    <ul  class="navbar-nav">
+      <li [ngClass]="{'active': activeRoute === '/about'}" class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/about">About</a>
+      </li>
+      <li [ngClass]="{'active': activeRoute === '/cart'}" class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/cart">Cart</a>
+      </li>
+      <li [ngClass]="{'active': activeRoute === '/catalog'}" class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/catalog">Catalog</a>
+      </li>
+      <li [ngClass]="{'active': activeRoute === '/contact'}" class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/contact">Contact</a>
+      </li>
+      <li *ngIf="!authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/login'}"  class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/login">Login</a>
+      </li>
+      <li *ngIf="!authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/register'}" class="nav-item">
+        <a class="nav-link" style="color:white" routerLink="/register">Register</a>
+      </li>
+      <li *ngIf="authService.isLoggedIn" [ngClass]="{'active': activeRoute === '/logout'}" class="nav-item">
+        <a class="nav-link" style="color: white" (click)="btnLogout()" >Logout</a>
+      </li>
+    </ul>
   </nav>

@@ -105,6 +105,12 @@
       text-align: center
     }
   }
+
+  @media (max-width:900px){
+    .container{
+      display: flex;
+    }
+  }
   
   .social-icons {
     padding-left: 0;

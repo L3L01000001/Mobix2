@@ -1,22 +1,28 @@
-<div class="mx-auto" style="width: 600px; background-color: white; margin-top:20px;">
-    <div class="container" style="display:inline-block;">
-      <div style="width: 300px; height:auto; display: grid; float: right; margin-top: 30px;">
-          <h1 style="font-size: 80px; text-align: center;font-family: Helvetica; color: palevioletred; height:90px;">MOBIX</h1>
-          <h1 style="font-size: 80px; text-align: center; font-family: Helvetica; color: palevioletred; height: 90px;">SHOP</h1>
+<div class="mx-auto" style="max-width: 600px; background-color: white; margin-top:20px;">
+    <div class="container" style="width: fit-content;">
+      <div class="titlecontainer">
+          <h1 class="title">MOBIX</h1>
+          <h1 class="title">SHOP</h1>
       </div>
   
-      <img src="../assets/LogoPink.png" alt="logo" style="width:250px;height:250px;" />
+      <img src="../assets/LogoPink.png" alt="logo" class="image" />
     </div>
   </div>
-  <div id="search" class="mx-auto" style="width: 904px; margin-top:40px">
+  <div id="search" class="mx-auto">
     <!-- <form class="form-inline" asp-action="PrikazProizvoda" asp-controller="Home"> -->
-      <input [(ngModel)]="filterProizvod" id="searchbar" style="width:818px; height:35px; border-radius: 20px; margin-right: 5px; padding-left: 20px; border-color:palevioletred" type="search" placeholder="Search" aria-label="Search" name="q">
-      <button type="button" style="background-color:palevioletred; color: white; height: 35px; width: 80px; border-radius: 10px; border: 0;" (click)="search()">Search</button>
+      <input [(ngModel)]="filterProizvod" id="searchbar" type="search" placeholder="Search" aria-label="Search" name="q">
+      <button type="button" class="search-button" (click)="search()">Search</button>
     <!-- </form> -->
   </div>
   <div class="container-fluid" style="margin-top:60px;">
     <button id="accentEdit" *ngIf="authService.adminUser" mat-flat-button class="button" (click)="changeEditState()">Edit </button>
     <button id="accentAdd" *ngIf="authService.adminUser" mat-flat-button class="button" (click)="noviProizvod()">Add New Product </button>
+    <div class="sort-container">
+      <label for="sortSelect">Sort by:</label>
+      <select id="sortSelect" [(ngModel)]="odabranaSortOpcija" (change)="onSortChange()">
+        <option *ngFor="let option of sortOpcije" [value]="option.value">{{ option.displayName }}</option>
+      </select>
+    </div>
     <mat-divider class="divider"></mat-divider>
     <div class="col-auto mb-3" style="display:flex; gap: 70px; flex-wrap:wrap;">
       <div *ngFor="let p of proizvodi" class="card" style="width: 18rem;border-color: palevioletred;border-width: 3px;">
@@ -29,8 +35,8 @@
               <h4 style="color:palevioletred; font-family: Helvetica; font-size: 17px; font-weight: 700; text-align:center; margin-top:10px;"><a>{{p.cijena}} KM</a></h4>
               <div class="buttons">
                 <div class="button-group">
-                  <a routerLink="/cart" class=" btn" style="text-align:center; background-color:rgb(216, 112, 147); color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Add to Cart</a>
-                  <a [routerLink]="['/product-details', p.proizvodID]" class="btn card-link" style="text-align:center; background-color:palevioletred; color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Read More</a>
+                  <a routerLink="/cart" class="btn" class="card-buttons">Add to Cart</a>
+                  <a [routerLink]="['/product-details', p.proizvodID]" class="btn" class="card-buttons">Read More</a>
                 </div>
               <a *ngIf="editable==true" [routerLink]="['/product-edit', p.proizvodID]" class="btn card-link" style="text-align:center; background-color:palevioletred; color: white; height: 35px; width: 100px; border-radius: 7px; border: 0; padding: 5px;">Edit</a>
               </div>
