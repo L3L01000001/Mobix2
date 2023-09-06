@@ -15,6 +15,14 @@ export class CatalogComponent implements OnInit {
   lokalniEmail:any=localStorage.getItem('email');
   odabraniProizvod: any = null;
   showModal = false;
+  sortOpcije = [
+    { value: 'cijena-asc', displayName: 'Lowest Price' },
+    { value: 'cijena-desc', displayName: 'Highest Price' },
+    { value: 'novo', displayName: 'New' },
+    { value: 'polovno', displayName: 'Used' }
+  ];
+  odabranaSortOpcija = 'price-asc';
+  searchResults: any[] = [];
   constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public authService: AuthService){}
 
   testirajWebApi(): void {
@@ -59,6 +67,22 @@ export class CatalogComponent implements OnInit {
         }
       });
     });
+  }
+
+  getSortiraniProizvodi() {
+    this.httpClient.get( "https://localhost:7278/" + `api/get-all-products-sorting?sortBy=${this.odabranaSortOpcija}`)
+    .subscribe(res => {
+      this.proizvodi = res;
+      this.proizvodi.forEach((proizvod: any) => {
+        if (!proizvod.slikaProizvoda.startsWith("http")) {
+          proizvod.slikaProizvoda = "https://localhost:7278/Images/" + proizvod.slikaProizvoda;
+        }
+      });
+    });
+  }
+
+  onSortChange() {
+    this.getSortiraniProizvodi();
   }
   
   ngOnInit(): void {

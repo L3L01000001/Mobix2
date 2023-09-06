@@ -28,6 +28,7 @@ export class IndexComponent implements OnInit {
         .subscribe((x: any[]) => {
           this.proizvodi = x;
           console.log("search results:", x)
+          this.router.navigate(['/catalog']);
         });
     } else {
       this.router.navigate(['/catalog']);

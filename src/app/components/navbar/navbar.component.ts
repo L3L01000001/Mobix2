@@ -13,6 +13,11 @@ export class NavbarComponent implements OnInit{
   activeRoute: string = "";
   dozvoljenAdmin:boolean=false;
   email:any="";
+  isMenuOpen: boolean = false;
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   constructor(private router: Router, public authService:AuthService) {
     this.router.events.subscribe((event) => {
