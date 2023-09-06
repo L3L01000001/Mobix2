@@ -74,20 +74,20 @@ namespace Mobix.Controllers
         {
             if (userId == null || token == null)
             {
-                return BadRequest("Invalid confirmation link.");
+                return BadRequest("Nevazeci konfirmacijski link.");
             }
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return BadRequest("User not found.");
+                return BadRequest("Korisnik nije pronadjen.");
             }
 
             user.EmailConfirmed = true;
             user.EmailVerificationToken = null;
             await _userManager.UpdateAsync(user);
 
-            return Ok("Email confirmed successfully!");
+            return Ok("Email potvrdjen!");
         }
 
 
@@ -96,24 +96,25 @@ namespace Mobix.Controllers
         {
             if (!ModelState.IsValid || model == null)
             {
-                return new BadRequestObjectResult(new { Message = "Login failed" });
+                return new BadRequestObjectResult(new { Message = "Neuspjeli login" });
             }
 
             var identityUser = await _userManager.FindByNameAsync(model.Email);
             var identityUser1 = await _userManager.FindByEmailAsync(model.Email);
             if(identityUser.EmailConfirmed == false)
             {
-                return BadRequest("Email is not confirmed");
+                return BadRequest("Email nije potvrdjen");
             }
             if (identityUser == null)
             {
                 var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser1, identityUser1.PasswordHash, model.Password);
                 if (result == PasswordVerificationResult.Failed)
                 {
-                    return new BadRequestObjectResult(new { Message = "Login failed" });
+                    return new BadRequestObjectResult(new { Message = "Neuspjeli login" });
                 }
                 var roles = await _userManager.GetRolesAsync(identityUser1);
                 var userRole = identityUser1.UserRole;
+                var userId = identityUser1.Id;
                 var signingCredentials = _jwtHandler.GetSigningCredentials();
                 var claims = _jwtHandler.GetClaims(identityUser1);
                 var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
@@ -127,21 +128,22 @@ namespace Mobix.Controllers
                 var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser, identityUser.PasswordHash, model.Password);
                 if (result == PasswordVerificationResult.Failed)
                 {
-                    return new BadRequestObjectResult(new { Message = "Login failed" });
+                    return new BadRequestObjectResult(new { Message = "Neuspjeli login" });
                 }
                 var roles = await _userManager.GetRolesAsync(identityUser);
                 var userRole = roles.FirstOrDefault();
+                var userId = identityUser.Id;
                 var signingCredentials = _jwtHandler.GetSigningCredentials();
                 var claims = _jwtHandler.GetClaims(identityUser);
                 var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
                 var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-                return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole });
+                return Ok(new AuthResponseDTO { IsAuthSuccessful = true, Token = token, Role = userRole, KorisnikId = userId });
             }
 
             else
             {
-                return BadRequest("Something went wrong");
+                return BadRequest("Nesto nije u redu.");
             }
 
         }
@@ -149,7 +151,7 @@ namespace Mobix.Controllers
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
-            return Ok(new { Message = "You are logged out" });
+            return Ok(new { Message = "Logout izvrsen" });
         }
     }
 }

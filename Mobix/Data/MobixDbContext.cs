@@ -86,9 +86,20 @@ namespace Mobix.Data
                 DobavljacProizvodaID = 2,
                 Opis = "Apple iPhone 11 GREEN \r\n-Memorija 128 GB\r\n-Mobitel je kao nov (stanje 10/10)\r\n-Svi dijelovi originalni, ništa mijenjano \r\n-Face id i True tone rade \r\n-Apsolutno sve ispravno i otključano\r\n-Fabrička kutija, originalne Apple slušalice, kabal za punjenje, zaštitno staklo, papiri",
                 Stanje = "Polovno",
-                SlikaProizvoda = "https://pcmarket.ba/wp-content/uploads/2021/09/Apple-iPhone-11-64GB-Green..jpg"
+                SlikaProizvoda = "595d98ff-849c-4c13-a341-5ccb384e9f0f.jpg"
             });
 
+            modelBuilder.Entity<Proizvod>().HasData(new Proizvod()
+            {
+                ProizvodID = 2,
+                Cijena = 1500,
+                Naziv = "iPhone 12 Pro",
+                Kolicina = 2,
+                DobavljacProizvodaID = 2,
+                Opis = "Novi telefon full pakovanje",
+                Stanje = "Novo",
+                SlikaProizvoda = "595d98ff-849c-4c13-a341-5ccb384e9f0f.jpg"
+            });
 
             base.OnModelCreating(modelBuilder);
         }
