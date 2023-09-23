@@ -113,11 +113,27 @@
     }
   }
 
-  @media (max-width:900px) {
+  @media (max-width:580px) {
     .cart-responsive{
       position: absolute;
       top: 30px;
       right: 90px;
+    }
+  }
+
+  @media (min-width:580px) and (max-width:770px) {
+    .cart-responsive{
+      position: absolute;
+      top: 30px;
+      left: 70%;
+    }
+  }
+
+  @media (min-width:770px) and  (max-width:990px) {
+    .cart-responsive{
+      position: absolute;
+      top: 30px;
+      left: 75%;
     }
   }
   
