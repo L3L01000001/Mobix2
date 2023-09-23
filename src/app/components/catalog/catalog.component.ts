@@ -155,7 +155,6 @@ export class CatalogComponent implements OnInit {
           });
           const totalResults = this.proizvodi.length;
           this.disablePagination = totalResults <= this.itemsPerPage;
-          console.log(this.disablePagination)
         });
     } else {
       this.isSearchActive = false;

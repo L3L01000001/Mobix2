@@ -44,7 +44,6 @@ export class AuthService {
     this.getUserRole=localStorage.getItem('role')!;
     this.setKorisnikId();
     this.cartService.updateCartItemCountUser(this.korisnikId ?? '');
-    console.log(this.getUserRole);
     if(this.getUserRole=="Admin")
       this.adminUser=true;
     else if (this.getUserRole=="Korisnik")

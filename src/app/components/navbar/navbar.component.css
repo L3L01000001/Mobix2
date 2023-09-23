@@ -103,8 +103,8 @@
     margin: 0
   }
 
-  .cartResponsive{
-    display: none;
+  .cart-responsive{
+   visibility: hidden;
   }
   
   @media (max-width:991px) {
@@ -115,6 +115,7 @@
 
   @media (max-width:580px) {
     .cart-responsive{
+      visibility:visible;
       position: absolute;
       top: 30px;
       right: 90px;
@@ -123,6 +124,7 @@
 
   @media (min-width:580px) and (max-width:770px) {
     .cart-responsive{
+      visibility:visible;
       position: absolute;
       top: 30px;
       left: 70%;
@@ -131,6 +133,7 @@
 
   @media (min-width:770px) and  (max-width:990px) {
     .cart-responsive{
+      visibility:visible;
       position: absolute;
       top: 30px;
       left: 75%;
