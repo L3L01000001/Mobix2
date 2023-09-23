@@ -19,7 +19,7 @@ namespace Mobix.Controllers
         }
 
         [HttpGet("cart")]
-        public IActionResult Get(int korisnikId)
+        public IActionResult Get(string korisnikId)
         {
             var korpa = _db.Korpa
                 .Include(k => k.KorpaStavke)
@@ -42,7 +42,7 @@ namespace Mobix.Controllers
         }
 
         [HttpPost("dodaj")]
-        public IActionResult DodajUKorpu(int korisnikID, int proizvodID)
+        public IActionResult DodajUKorpu(string korisnikID, int proizvodID)
         {
             var korpa = _db.Korpa.Include(k => k.KorpaStavke).FirstOrDefault(k => k.KorisnikId == korisnikID);
 
