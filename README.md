@@ -1,7 +1,7 @@
 # Mobix2
 
-Backend: 
-CartController
+#Backend: 
+#CartController
 AdminController (CRUD za proizvode)
 AuthenticationController 
 SearchController (za pretraživanje proizvoda)
